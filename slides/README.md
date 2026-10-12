@@ -1,17 +1,18 @@
-# builder-session-jujuy
-Builder Session Jujuy · Agents on Open Rails (Celo × Ripio) · sáb 17/10
+# Slides · Builder Session Jujuy
+Agents on Open Rails (Celo × Ripio) · sáb 17/10
 
 Deck interactivo de la sesión: HTML + CSS + JS, sin build ni dependencias.
 
 ## Ver la presentación
 
-Abrí `index.html` en el navegador (doble clic), o serví la carpeta:
+Online: https://francoduran23.github.io/builder-session-jujuy/slides/
+
+En local, abrí `slides/index.html` en el navegador (doble clic), o serví la carpeta:
 
 ```bash
 npx serve .        # o: python3 -m http.server
 ```
 
-Para publicarla, activá GitHub Pages en *Settings → Pages* sobre esta rama/carpeta raíz.
 
 ## Controles
 
