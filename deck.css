@@ -401,7 +401,7 @@ strong { font-weight: 700; color: var(--text); }
    02 · Web1–5
    ============================================================ */
 
-.webs { grid-template-columns: repeat(5, 1fr); gap: 20px; margin-top: 50px; }
+.webs { grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 50px; }
 .web {
   height: 460px;
   padding: 34px 24px 26px;
@@ -416,9 +416,9 @@ strong { font-weight: 700; color: var(--text); }
   transition: width .9s var(--ease);
 }
 .slide:not(.active) .web .bar { width: 0; }
-.web h3 { font-size: 40px; font-weight: 400; transition: color .3s; }
+.web h3 { font-size: 44px; font-weight: 400; transition: color .3s; }
 .web .label { color: var(--cyan); margin: 14px 0 34px; line-height: 1.5; font-size: 14px; font-weight: 700; min-height: 42px; }
-.web p { font-size: 18px; line-height: 1.6; color: #d9d9dc; }
+.web p { font-size: 20px; line-height: 1.6; color: #d9d9dc; }
 .web.hot h3 { color: var(--cyan); }
 .web .tag {
   position: absolute;
@@ -572,6 +572,66 @@ strong { font-weight: 700; color: var(--text); }
 .range { width: 100%; accent-color: var(--cyan); }
 .gasline { display: flex; justify-content: space-between; color: var(--muted); margin-top: 8px; }
 .gasline output { color: var(--cyan); font-weight: 700; }
+
+/* ============================================================
+   Para qué sirve
+   ============================================================ */
+
+.s-why { --accent: var(--cyan); }
+.why-head { display: flex; justify-content: space-between; align-items: flex-end; }
+.vs { display: flex; gap: 8px; padding-bottom: 8px; }
+.vs .pill { font-size: 13px; padding: 10px 16px; }
+.vs .pill.on { background: var(--cyan); border-color: var(--cyan); }
+.s-why[data-mode="web2"] .vs .pill.on { background: #d9d9dc; border-color: #d9d9dc; }
+.perks { grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+.perk { height: 228px; padding: 26px 28px; --accent: var(--cyan); }
+.perk .label { font-size: 14px; }
+.perk .label b { color: var(--cyan); margin-right: 14px; }
+.perk h3 { font-size: 26px; font-weight: 700; margin: 16px 0 14px; transition: color .3s; }
+.perk p:not(.label) { font-size: 18px; line-height: 1.55; }
+.perk [data-web2] { display: none; color: var(--muted); }
+.perk [data-web3] { color: #e4e4e7; }
+.s-why[data-mode="web2"] .perk [data-web2] { display: block; animation: rise .45s var(--ease); }
+.s-why[data-mode="web2"] .perk [data-web3] { display: none; }
+.s-why[data-mode="web2"] .perk h3 { color: var(--muted); }
+.s-why[data-mode="web2"] .perk .label b { color: var(--dim); }
+.s-why:not([data-mode="web2"]) .perk [data-web3] { animation: rise .45s var(--ease); }
+.s-why .foot { margin-top: 30px; font-size: 20px; color: var(--muted); line-height: 1.5; }
+.s-why .foot b { color: var(--cyan); }
+
+/* ============================================================
+   Por qué ahora
+   ============================================================ */
+
+.s-now { --accent: var(--cyan); }
+.s-now .cols { display: grid; grid-template-columns: 1fr 440px; gap: 60px; margin-top: 44px; }
+.reasons { border-top: 1px solid var(--line); }
+.reason { border-bottom: 1px solid var(--line); }
+.r-head {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 70px 1fr 30px;
+  align-items: center;
+  padding: 22px 0;
+  text-align: left;
+  font-size: 25px;
+  transition: padding .3s var(--ease), color .2s;
+}
+.r-head:hover { padding-left: 10px; }
+.r-head em { font-style: normal; color: var(--cyan); font-weight: 700; }
+.chev { width: 12px; height: 12px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); transition: transform .3s var(--ease); justify-self: end; margin-right: 6px; }
+.reason.open .chev { transform: rotate(-135deg); border-color: var(--cyan); }
+.reason.open .r-head span { color: var(--cyan); }
+.r-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s var(--ease); }
+.r-body p { overflow: hidden; padding-left: 70px; font-size: 20px; line-height: 1.6; color: var(--muted); }
+.r-body p b { color: var(--text); }
+.reason.open .r-body { grid-template-rows: 1fr; }
+.reason.open .r-body p { padding-bottom: 24px; }
+.latam { padding: 36px 34px; align-self: start; border-color: var(--cyan); --accent: var(--cyan); }
+.latam .label { color: var(--cyan); font-weight: 700; }
+.latam .serif { font-size: 50px; line-height: 1.1; margin: 22px 0 26px; }
+.latam .serif span { color: var(--cyan); display: block; }
+.latam .txt { font-size: 19px; line-height: 1.6; color: var(--muted); }
 
 /* ============================================================
    06 · Celo

@@ -339,6 +339,26 @@
     setInterval(tick, 1000);
   })();
 
+  /* Web3: comparar con banco / app */
+  (() => {
+    const sl = $(".s-why");
+    const set = (m) => {
+      sl.dataset.mode = m;
+      $$("[data-vs]", sl).forEach((b) => b.classList.toggle("on", b.dataset.vs === m));
+    };
+    $$("[data-vs]", sl).forEach((b) => (b.onclick = () => set(b.dataset.vs)));
+    onEnter(".s-why", () => set("web3"));
+  })();
+
+  /* Por qué ahora: acordeón */
+  (() => {
+    const items = $$("#reasons .reason");
+    items.forEach((it) => ($(".r-head", it).onclick = () => {
+      const open = !it.classList.contains("open");
+      items.forEach((x) => x.classList.toggle("open", open && x === it));
+    }));
+  })();
+
   /* 09 · ruta de la plata */
   (() => {
     const route = $("#route");
@@ -377,7 +397,7 @@
     };
     btns.forEach((b, i) => (b.onclick = () => focus(i)));
     cards.forEach((c, i) => c.addEventListener("click", () => {
-      if (c.dataset.go && c.classList.contains("hot")) return go(+c.dataset.go - 1);
+      if (c.dataset.go && c.classList.contains("hot")) return go(slides.findIndex((s) => s.matches(c.dataset.go)));
       focus(i);
     }));
     onEnter(".s-tracks", () => focus(null));

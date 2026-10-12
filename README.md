@@ -30,17 +30,19 @@ En el celu/tablet: deslizar a los costados. Cada slide tiene su URL (`#/7`). La 
 
 ## Qué es interactivo
 
+- **06 · ¿Para qué sirve la Web3?** — 6 ventajas con comparación “con un banco / app” vs. “con Web3”.
+- **07 · ¿Por qué se habla tanto ahora?** — acordeón con los 4 motivos + el caso LatAm.
 - **04 · Blockchain** — cadena de 3 bloques editable: cambiá un movimiento y la cadena se rompe.
 - **05 · Conceptos** — clave privada que “no se muestra”, conversor ARS → wARS 1:1, costo de gas por cantidad de tx.
-- **07 · Números** — contadores animados y calculadora de gas mensual.
-- **08 / 17** — cuenta regresiva al cierre (lun 9/11, 06:00 ART).
-- **09 · wFIAT** — ruta de la plata: hoy (vía USD) vs. con wFIAT.
-- **10 · Tracks** — barra de premios y tarjetas para enfocar cada track (Track 1 abre su detalle).
-- **11 / 13 / 17** — checklists que se guardan en el navegador.
-- **12 · Evaluación** — autoevaluación de 5 criterios (20 % c/u).
-- **14 · Ideas** — “elegí una al azar”.
-- **15 · Stack** — comandos con copiar al portapapeles.
-- **16 · Sedes** — mapa con las 6 ciudades y quién organiza cada una.
+- **09 · Números** — contadores animados y calculadora de gas mensual.
+- **10 / 19** — cuenta regresiva al cierre (lun 9/11, 06:00 ART).
+- **11 · wFIAT** — ruta de la plata: hoy (vía USD) vs. con wFIAT.
+- **12 · Tracks** — barra de premios y tarjetas para enfocar cada track (Track 1 abre su detalle).
+- **13 / 15 / 19** — checklists que se guardan en el navegador.
+- **14 · Evaluación** — autoevaluación de 5 criterios (20 % c/u).
+- **16 · Ideas** — “elegí una al azar”.
+- **17 · Stack** — comandos con copiar al portapapeles.
+- **18 · Sedes** — mapa con las 6 ciudades y quién organiza cada una.
 
 ## Archivos
 
