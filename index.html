@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="deck.css">
+<link rel="stylesheet" href="deck.css?v=3">
 </head>
 <body>
 <div class="viewport">
@@ -604,6 +604,11 @@
   <div class="toast" id="toast"></div>
 </main>
 </div>
-<script src="deck.js"></script>
+<div class="rotate" id="rotate" role="status">
+  <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M3 9a9 9 0 0 1 4-5M21 15a9 9 0 0 1-4 5"/></svg>
+  <span>Girá el celular para ver las slides en grande. Deslizá para avanzar.</span>
+  <button aria-label="Cerrar">✕</button>
+</div>
+<script src="deck.js?v=3"></script>
 </body>
 </html>

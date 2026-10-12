@@ -509,6 +509,8 @@
     select(0);
   })();
 
+  $("#rotate button").onclick = () => $("#rotate").classList.add("gone");
+
   /* ---------- Arranque ---------- */
   go(fromHash(), { replace: true });
 })();

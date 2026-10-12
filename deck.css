@@ -1116,6 +1116,30 @@ strong { font-weight: 700; color: var(--text); }
 }
 .toast.show { opacity: 1; translate: -50% 0; }
 
+/* celular vertical: aviso para girar */
+.rotate {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 24px;
+  display: none;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: #131316;
+  border: 1px solid var(--green);
+  color: var(--text);
+  font: 14px/1.4 var(--mono);
+  z-index: 100;
+}
+.rotate svg { width: 28px; height: 28px; flex: none; stroke: var(--green); fill: none; stroke-width: 1.6; }
+.rotate button { margin-left: auto; color: var(--muted); font-size: 18px; padding: 4px 8px; }
+@media (orientation: portrait) and (max-width: 820px) {
+  .rotate:not(.gone) { display: flex; }
+  .hint { display: none; }
+  .dock { opacity: 1; }
+}
+
 /* print → una slide por página */
 @media print {
   @page { size: 1600px 900px; margin: 0; }
