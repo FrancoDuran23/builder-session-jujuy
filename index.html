@@ -1,874 +1,531 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Builder Session Jujuy · Stable Agents: LatAm IRL</title>
-  <meta name="description" content="Builder Session Jujuy de la hackathon Agents on Open Rails. Sábado 17/10, 18:00 a 20:00 (hora argentina), en MINTA Café &amp; Coworking. Celo Core Co. × Ripio.">
-  <meta name="theme-color" content="#0B0A0C">
-  <meta name="color-scheme" content="dark">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%230B0A0C' width='32' height='32'/%3E%3Crect fill='%233DDC84' x='8' y='8' width='10' height='10'/%3E%3C/svg%3E">
-  <link rel="preload" href="fonts/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <style>
-    @font-face {
-      font-family: "JetBrains Mono";
-      src: url("fonts/JetBrainsMono-Regular.woff2") format("woff2");
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: "JetBrains Mono";
-      src: url("fonts/JetBrainsMono-SemiBold.woff2") format("woff2");
-      font-weight: 600;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    :root {
-      --bg: #0B0A0C;
-      --card: #141315;
-      --line: #2B2A2C;
-      --text: #ffffff;
-      --muted: #B8B8B8;
-      --soft: #D8D8D8;
-      --green: #3DDC84;
-      --purple: #A98BFF;
-      --lilac: #D6C8FF;
-      --orange: #FF8A3D;
-      --yellow: #FCFF52;
-      --code: #050506;
-      --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--mono);
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 1.55;
-    }
-    img { max-width: 100%; }
-    a { color: var(--green); }
-    :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
-    .sr {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    .grid {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-      background-size: 22px 22px;
-    }
-    .grid::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        180deg,
-        transparent 0 28%,
-        rgba(255, 255, 255, 0.05) 28% calc(28% + 1px),
-        transparent 0
-      );
-    }
-
-    header, main, footer { position: relative; z-index: 1; }
-
-    .top {
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px 18px;
-      flex-wrap: wrap;
-      padding: 14px clamp(16px, 4vw, 28px);
-      background: rgba(11, 10, 12, 0.9);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(10px);
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text);
-      text-decoration: none;
-      font-size: 12.5px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .dot {
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      box-shadow: 0 0 12px rgba(61, 220, 132, 0.8);
-      flex: none;
-    }
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 8px 16px;
-      flex-wrap: wrap;
-    }
-    .nav a:not(.cta) {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .nav a:not(.cta):hover { color: var(--text); }
-
-    .cta {
-      display: inline-block;
-      background: var(--green);
-      color: var(--bg);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 12.5px;
-      letter-spacing: 0.04em;
-      padding: 11px 14px;
-      border: 1px solid var(--green);
-    }
-    .cta:hover { background: var(--text); border-color: var(--text); color: var(--bg); }
-    .cta.ghost {
-      background: transparent;
-      color: var(--text);
-      border-color: var(--line);
-    }
-    .cta.ghost:hover { border-color: var(--green); color: var(--green); background: transparent; }
-
-    .wrap {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-    section { padding: 72px 0; scroll-margin-top: 84px; }
-    .label {
-      margin: 0 0 14px;
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .label strong { color: var(--text); font-weight: 600; }
-    h1, h2, h3 { font-weight: 400; letter-spacing: -0.03em; line-height: 1.08; }
-    h1 {
-      margin: 0 0 18px;
-      font-size: clamp(36px, 6.2vw, 76px);
-    }
-    h2 {
-      margin: 0 0 22px;
-      font-size: clamp(26px, 3.4vw, 42px);
-      max-width: 22ch;
-    }
-    h3 { margin: 0; font-size: clamp(18px, 2vw, 22px); letter-spacing: -0.02em; line-height: 1.25; }
-    .lead, .prose {
-      margin: 0;
-      color: var(--soft);
-      font-size: clamp(14px, 1.45vw, 17px);
-      line-height: 1.6;
-      max-width: 68ch;
-    }
-    .hero-where {
-      display: block;
-      margin-top: 12px;
-      color: var(--green);
-      font-size: 0.38em;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      line-height: 1.35;
-    }
-
-    .hero { padding: 48px 0 28px; }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
-      gap: 28px;
-      align-items: end;
-    }
-    .partners {
-      margin: 0 0 22px;
-      color: var(--green);
-      font-size: clamp(14px, 1.6vw, 18px);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-    .meta { display: flex; flex-direction: column; gap: 6px; margin: 0 0 26px; }
-    .meta p { margin: 0; font-size: clamp(13px, 1.35vw, 15px); letter-spacing: 0.04em; text-transform: uppercase; }
-    .meta span { color: var(--muted); }
-    .meta a { color: inherit; }
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
-
-    .ticket {
-      background: var(--card);
-      border: 1px solid var(--line);
-      padding: 22px 22px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .ticket .k {
-      margin: 0 0 6px;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--green);
-    }
-    .ticket strong { display: block; font-weight: 600; font-size: 18px; letter-spacing: -0.02em; }
-    .ticket p { margin: 0; color: var(--soft); font-size: 14px; line-height: 1.5; }
-    .ticket a { color: var(--green); text-decoration: none; border-bottom: 1px solid rgba(61, 220, 132, 0.4); }
-    .ticket a:hover { border-bottom-color: var(--green); }
-    .ticket-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding-top: 14px;
-      border-top: 1px solid var(--line);
-      font-size: 13px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .ticket-row b { font-weight: 600; color: var(--yellow); }
-
-    .px { position: relative; }
-    .px i {
-      position: absolute;
-      width: 22px;
-      height: 22px;
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow: 22px 0 0 rgba(255, 255, 255, 0.05), 0 22px 0 rgba(255, 255, 255, 0.04);
-      pointer-events: none;
-    }
-    .px i:nth-child(1) { top: -8px; right: 18%; }
-    .px i:nth-child(2) { top: 36px; right: 8%; }
-
-    .agbar { display: flex; gap: 6px; margin: 0 0 22px; }
-    .agbar i { height: 10px; background: rgba(255, 255, 255, 0.22); }
-    .agbar i:nth-child(1) { flex: 15; }
-    .agbar i:nth-child(2) { flex: 45; background: var(--green); }
-    .agbar i:nth-child(3) { flex: 60; background: rgba(252, 255, 82, 0.75); }
-    .agenda {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
-    .ag {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      border-top: 1px solid var(--line);
-      padding-top: 14px;
-    }
-    .ag b { font-weight: 400; font-size: clamp(26px, 3vw, 34px); letter-spacing: -0.03em; }
-    .ag:nth-child(1) b { color: var(--muted); }
-    .ag:nth-child(2) b { color: var(--green); }
-    .ag:nth-child(3) b { color: var(--yellow); }
-    .ag em {
-      font-style: normal;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .ag strong { font-weight: 600; font-size: 18px; margin-top: 4px; }
-    .ag span { color: var(--soft); font-size: 14.5px; line-height: 1.55; }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 8px;
-    }
-    .stats div {
-      border-top: 1px solid var(--line);
-      padding-top: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .stats b {
-      font-weight: 400;
-      font-size: clamp(36px, 5vw, 64px);
-      letter-spacing: -0.03em;
-      line-height: 1;
-      color: var(--yellow);
-    }
-    .stats span {
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .foot-note { margin: 22px 0 0; color: var(--muted); font-size: 14.5px; max-width: 78ch; }
-
-    .facts {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin: 8px 0 18px;
-    }
-    .facts div, .card, .idea, .track, .rule, .step, .token {
-      background: var(--card);
-      border: 1px solid var(--line);
-    }
-    .facts div { padding: 14px 14px 16px; display: flex; flex-direction: column; gap: 8px; }
-    .facts em {
-      font-style: normal;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--green);
-    }
-    .facts b { font-weight: 600; font-size: 15px; line-height: 1.35; letter-spacing: -0.02em; }
-
-    .tracks {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }
-    .track {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 16px 16px 18px;
-      border-top: 3px solid var(--c, var(--green));
-      min-width: 0;
-    }
-    .track em {
-      font-style: normal;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--c, var(--green));
-    }
-    .track p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.5; flex: 1; }
-    .prizes { display: flex; gap: 14px; padding-top: 8px; border-top: 1px solid var(--line); }
-    .prizes div { display: flex; flex-direction: column; gap: 2px; }
-    .prizes span {
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .prizes b { color: var(--yellow); font-weight: 400; font-size: 22px; letter-spacing: -0.03em; }
-
-    .criteria { margin-top: 14px; }
-    .criteria ol {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
-    }
-    .criteria li {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-left: 2px solid var(--green);
-      padding: 12px 12px 14px;
-      color: var(--soft);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-    .criteria li b { display: block; color: var(--text); font-weight: 600; margin-bottom: 6px; }
-
-    .rules, .ideas, .steps, .two {
-      display: grid;
-      gap: 12px;
-    }
-    .rules, .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .ideas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 22px; }
-    .rule, .idea, .step { padding: 16px 16px 18px; display: flex; flex-direction: column; gap: 8px; }
-    .rule { border-left: 2px solid var(--yellow); }
-    .rule b, .idea b, .step b { font-weight: 600; font-size: 16px; }
-    .idea b { color: var(--green); }
-    .rule span, .idea span, .step span { color: var(--soft); font-size: 14px; line-height: 1.5; }
-    .step em { font-style: normal; color: var(--green); font-size: 12px; letter-spacing: 0.1em; }
-
-    .callout {
-      margin-top: 12px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-left: 2px solid var(--orange);
-      padding: 16px 18px;
-    }
-    .callout b { display: block; margin-bottom: 6px; font-size: 16px; }
-    .callout p { margin: 0; color: var(--soft); font-size: 14.5px; line-height: 1.55; }
-
-    .stack-block { margin: 0 0 22px; }
-    .stack-block h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; }
-    .cmd {
-      position: relative;
-      background: var(--code);
-      border: 1px solid var(--line);
-    }
-    .cmd pre {
-      margin: 0;
-      padding: 14px 108px 14px 16px;
-      font-family: var(--mono);
-      font-size: clamp(12.5px, 1.35vw, 14.5px);
-      line-height: 1.55;
-      color: var(--green);
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-    }
-    .cmd .prompt { color: var(--muted); }
-    .cmd button {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--green);
-      background: transparent;
-      border: 1px solid rgba(61, 220, 132, 0.45);
-      padding: 6px 10px;
-      cursor: pointer;
-    }
-    .cmd button:hover { background: rgba(61, 220, 132, 0.12); }
-    .caption { margin: 8px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.5; max-width: 78ch; }
-
-    .token {
-      min-width: 0;
-      padding: 16px 18px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .token em {
-      font-style: normal;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--green);
-    }
-
-    .close-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px 36px;
-      align-items: end;
-      justify-content: space-between;
-    }
-    .when { margin: 0 0 18px; }
-    .when p { margin: 0 0 4px; letter-spacing: 0.04em; text-transform: uppercase; font-size: 14px; }
-    .when span { color: var(--muted); }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 22px 0 36px;
-      color: var(--muted);
-      font-size: 12.5px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-    footer a { color: var(--muted); }
-
-    @media (max-width: 980px) {
-      .tracks, .facts, .criteria ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media (max-width: 800px) {
-      .hero-grid, .agenda, .ideas { grid-template-columns: minmax(0, 1fr); }
-      .nav a:not(.cta) { display: none; }
-      section { padding: 52px 0; }
-    }
-    @media (max-width: 640px) {
-      .stats, .rules, .two, .tracks, .facts, .criteria ol, .steps { grid-template-columns: minmax(0, 1fr); }
-      .wrap { width: min(1120px, calc(100% - 28px)); }
-      .cmd pre { padding-right: 16px; padding-bottom: 48px; }
-      .cmd button { top: auto; bottom: 8px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Builder Session Jujuy · Agents on Open Rails</title>
+<meta name="description" content="Builder Session Jujuy · Agents on Open Rails Hackathon (Celo × Ripio) · sábado 17/10, 18:00">
+<meta name="theme-color" content="#09090b">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%2309090b'/><rect x='4' y='4' width='8' height='8' fill='%2335d07f'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="deck.css">
 </head>
 <body>
-  <div class="grid" aria-hidden="true"></div>
-  <p class="sr" id="copy-status" aria-live="polite"></p>
+<div class="viewport">
+<main class="stage" id="stage" data-cover="true">
 
-  <header class="top">
-    <a class="brand" href="#inicio"><span class="dot" aria-hidden="true"></span> Stable Agents: LatAm IRL</a>
-    <nav class="nav" aria-label="Secciones">
-      <a href="#agenda">Agenda</a>
-      <a href="#celo">Celo</a>
-      <a href="#tracks">Tracks</a>
-      <a href="#stack">Stack</a>
-      <a href="slides/">Slides</a>
-      <a class="cta" href="https://www.loops.house/agents-on-open-rails">Inscribite en Loops House</a>
-    </nav>
+  <!-- ========== Header global ========== -->
+  <header class="chrome">
+    <div class="brand"><i></i>Agents on Open Rails · Builder Session Jujuy</div>
+    <nav class="progress" id="progress" aria-label="Secciones"></nav>
+    <div class="counter" id="counter"><b>01</b> / 17</div>
   </header>
 
-  <main id="inicio">
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="px">
-          <i aria-hidden="true"></i>
-          <i aria-hidden="true"></i>
-          <p class="label">/ Builder Session</p>
-          <h1>Stable Agents: LatAm IRL<span class="hero-where">· Builder Session Jujuy</span></h1>
-          <p class="partners">Celo Core Co. × Ripio</p>
-          <div class="meta">
-            <p><span>Fecha:</span> sábado 17/10 · 18:00 a 20:00 (hora argentina)</p>
-            <p><span>Sede:</span> <a href="https://www.google.com/maps/search/?api=1&amp;query=MINTA%20Cafe%20Coworking%20Salta%201079%20San%20Salvador%20de%20Jujuy">MINTA Café &amp; Coworking, Salta 1079, San Salvador de Jujuy</a></p>
-            <p><span>Host:</span> Franco Durán (<a href="https://x.com/fdurandev">@fdurandev</a>)</p>
-          </div>
-          <div class="actions">
-            <a class="cta" href="https://www.loops.house/agents-on-open-rails">Inscribite en Loops House</a>
-            <a class="cta ghost" href="https://t.me/realworldagentshackathon">Telegram de la hackathon</a>
-          </div>
-        </div>
-        <aside class="ticket" aria-label="Datos de la sede">
-          <div>
-            <p class="k">/ Jujuy</p>
-            <strong>MINTA Café &amp; Coworking</strong>
-            <p>Salta 1079<br>San Salvador de Jujuy</p>
-          </div>
-          <div>
-            <p class="k">Host</p>
-            <strong>Franco Durán</strong>
-            <p><a href="https://x.com/fdurandev">@fdurandev</a></p>
-          </div>
-          <div class="ticket-row">
-            <span>sábado 17/10</span>
-            <b>18:00–20:00</b>
-          </div>
-        </aside>
+  <!-- ========== 01 · Portada ========== -->
+  <section class="slide s-cover" data-section="0" data-title="Builder Session">
+    <div class="left">
+      <p class="eyebrow serif" data-in>Agents on Open Rails Hackathon</p>
+      <h1 class="big" data-in><span>Builder</span><span>Session</span></h1>
+      <p class="duo" data-in>/ CELO × RIPIO</p>
+      <dl class="meta" data-in>
+        <div><dt>FECHA:</dt><dd>sábado 17/10 · 18:00</dd></div>
+        <div><dt>SEDE:</dt><dd>Jujuy, Argentina</dd></div>
+        <div><dt>HOST:</dt><dd>Franco Durán · jujuy.dev</dd></div>
+      </dl>
+      <div class="logos" data-in>
+        <img src="assets/logo-celo.png" alt="Celo" height="36">
+        <span class="sep"></span>
+        <img src="assets/logo-ripio.png" alt="Ripio" height="40">
       </div>
-    </section>
-
-    <section id="agenda">
-      <div class="wrap">
-        <p class="label">/ Agenda · <strong>18:00 a 20:00</strong></p>
-        <h2>Pedite un café. Esto es más charla que clase.</h2>
-        <div class="agbar" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="agenda">
-          <article class="ag">
-            <b>18:00</b>
-            <em>15 min</em>
-            <strong>Llegada y café</strong>
-            <span>Quince minutos para llegar, pedirte algo y acomodarte.</span>
-          </article>
-          <article class="ag">
-            <b>18:15</b>
-            <em>45 min</em>
-            <strong>Keynote</strong>
-            <span>La hackathon y sus tracks, Celo y las wFiat de Ripio, el stack (Celopedia + eve) y cómo inscribirse en Loops House.</span>
-          </article>
-          <article class="ag">
-            <b>19:00</b>
-            <em>60 min</em>
-            <strong>Networking y dudas</strong>
-            <span>Armá equipo, contá tu idea y resolvé dudas con el host. Si querés, arrancá a codear ahí mismo.</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="celo">
-      <div class="wrap">
-        <p class="label">/ Celo</p>
-        <h2>La blockchain hecha para finanzas reales.</h2>
-        <div class="stats">
-          <div><b>20M+</b><span>Wallets MiniPay</span></div>
-          <div><b>$6.2B</b><span>Volumen mensual en stablecoins</span></div>
-          <div><b>450K+</b><span>Usuarios activos por día</span></div>
-        </div>
-        <p class="foot-note">L2 de Ethereum. Bloques de 1 segundo. Gas promedio de US$0.0005, pagable en USD₮, USDC o USDm.</p>
-      </div>
-    </section>
-
-    <section id="hackathon">
-      <div class="wrap">
-        <p class="label">/ Hackathon · <strong>Agents on Open Rails</strong></p>
-        <h2>Agentes que cobran, pagan y liquidan con plata real.</h2>
-        <div class="facts">
-          <div>
-            <em>Dónde</em>
-            <b>Online, en <a href="https://www.loops.house/agents-on-open-rails">Loops House</a></b>
-          </div>
-          <div>
-            <em>Ventana</em>
-            <b>Del 6/10 al lunes 9/11, 06:00 ART</b>
-          </div>
-          <div>
-            <em>Ganadores</em>
-            <b>Viernes 13/11</b>
-          </div>
-          <div>
-            <em>Premios</em>
-            <b>US$5.000 en CELO</b>
-          </div>
-        </div>
-        <p class="prose">Solo cuenta Celo mainnet. Podés usar cualquier framework de agentes y entrar en más de un track.</p>
-      </div>
-    </section>
-
-    <section id="tracks">
-      <div class="wrap">
-        <p class="label">/ Tracks · <strong>4 formas de ganar</strong></p>
-        <h2>US$5.000 en CELO, repartidos en cuatro tracks.</h2>
-        <div class="tracks">
-          <article class="track" style="--c:#3DDC84">
-            <em>Track 1 · Ripio × Celo</em>
-            <h3>Stable Agents: LatAm</h3>
-            <p>Cobran, pagan, ahorran y liquidan en las stablecoins locales de Ripio.</p>
-            <div class="prizes">
-              <div><span>1.er</span><b>US$1.500</b></div>
-              <div><span>2.do</span><b>US$500</b></div>
-            </div>
-          </article>
-          <article class="track" style="--c:#A98BFF">
-            <em>Track 2A · Textile</em>
-            <h3>Open Corridors: FX</h3>
-            <p>Cotizan y liquidan FX en Textile, un mercado de cambio onchain.</p>
-            <div class="prizes">
-              <div><span>1.er</span><b>US$750</b></div>
-              <div><span>2.do</span><b>US$250</b></div>
-            </div>
-          </article>
-          <article class="track" style="--c:#D6C8FF">
-            <em>Track 2B · Celo</em>
-            <h3>Open Corridors: USA₮ con x402</h3>
-            <p>Usuarios reales que liquidan USA₮ con el facilitador x402 de Celo.</p>
-            <div class="prizes">
-              <div><span>1.er</span><b>US$750</b></div>
-              <div><span>2.do</span><b>US$250</b></div>
-            </div>
-          </article>
-          <article class="track" style="--c:#FF8A3D">
-            <em>Track 3 · usebuy.ai</em>
-            <h3>Build with buy</h3>
-            <p>Productos que pagan por servicios que no son suyos: cómputo, browsers, datos, inferencia.</p>
-            <div class="prizes">
-              <div><span>Entre 5 proyectos</span><b>US$1.000</b></div>
-            </div>
-          </article>
-        </div>
-
-        <div class="criteria">
-          <p class="label" style="margin-top:28px">/ Track 1 · cómo te evalúan · 20% cada criterio</p>
-          <ol>
-            <li><b>01</b> Funciona en mainnet con wFiat real, verificado por tu tag.</li>
-            <li><b>02</b> Uso real de wFiat y del stack Celo: ERC-8004, x402, gas en stablecoins, MiniPay.</li>
-            <li><b>03</b> Autonomía: el agente actúa solo y le ahorra tiempo o plata a alguien concreto.</li>
-            <li><b>04</b> Una UX que alguien nuevo en cripto pueda usar, con montos en su moneda.</li>
-            <li><b>05</b> Impacto en LatAm: una necesidad real y para quién es.</li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <section id="requisitos">
-      <div class="wrap">
-        <p class="label">/ Requisitos</p>
-        <h2>Sin esto, tu proyecto no suma.</h2>
-        <div class="rules">
-          <article class="rule">
-            <b>Mainnet</b>
-            <span>Solo cuenta lo que pasa en Celo mainnet. Tener testnet en el repo está bien.</span>
-          </article>
-          <article class="rule">
-            <b>Attribution tag · ERC-8021</b>
-            <span>Va en el calldata de cada transacción, del lado del cliente (la wallet), no en el contrato. Lo que mandes sin tag no se puede acreditar después. El tag te lo da la skill de Loops House al registrarte.</span>
-          </article>
-          <article class="rule">
-            <b>Identidad · ERC-8004</b>
-            <span>Obligatorio en todos los tracks. Tu agente registra su identidad desde su propia wallet antes del cierre.</span>
-          </article>
-          <article class="rule">
-            <b>Repo público</b>
-            <span>En GitHub desde la inscripción y accesible hasta el juzgamiento. El código tiene que estar escrito durante la hackathon.</span>
-          </article>
-        </div>
-        <div class="callout">
-          <b>Un premio por track por equipo.</b>
-          <p>Si el gas lo paga un relayer tuyo, tenés que contarlo en la entrega: no cuenta como aporte del builder. El premio mira lo que construiste, no el gas que puso una infraestructura que controlás.</p>
-        </div>
-        <p class="foot-note">Cierre: lunes 9/11, 06:00 ART. Ganadores: viernes 13/11.</p>
-      </div>
-    </section>
-
-    <section id="ideas">
-      <div class="wrap">
-        <p class="label">/ Ideas</p>
-        <h2>¿Qué agente podrías construir?</h2>
-        <div class="ideas">
-          <article class="idea">
-            <b>Cobrador</b>
-            <span>Emite cobros en wARS, avisa por WhatsApp y concilia cuando entra el pago.</span>
-          </article>
-          <article class="idea">
-            <b>Remesas sin dólar</b>
-            <span>Manda wARS a Brasil y llega como wBRL, sin pasar por USD.</span>
-          </article>
-          <article class="idea">
-            <b>Ahorro automático</b>
-            <span>Separa un porcentaje de cada cobro apenas entra.</span>
-          </article>
-          <article class="idea">
-            <b>Pago a proveedores</b>
-            <span>Paga facturas recurrentes en la moneda de cada país, con tus límites.</span>
-          </article>
-          <article class="idea">
-            <b>Gastos compartidos</b>
-            <span>Divide los gastos de un viaje y liquida a cada uno en su moneda.</span>
-          </article>
-          <article class="idea">
-            <b>Comercio en el chat</b>
-            <span>Un bot de Telegram que vende y cobra en moneda local.</span>
-          </article>
-        </div>
-        <p class="foot-note">Podés entrar en más de un track. Las wFiat de Ripio — wARS, wBRL, wMXN, wCOP, wCLP, wPEN — son stablecoins locales. La «w» es de wrapped: 1:1 con la moneda, y no son de curso legal.</p>
-      </div>
-    </section>
-
-    <section id="stack">
-      <div class="wrap">
-        <p class="label">/ Stack</p>
-        <h2>Para arrancar el mismo sábado.</h2>
-
-        <div class="stack-block">
-          <h3>Celopedia</h3>
-          <div class="cmd">
-            <pre><code><span class="prompt">$ </span>npx skills add celo-org/celopedia-skills</code></pre>
-            <button type="button" data-copy="npx skills add celo-org/celopedia-skills">Copiar</button>
-          </div>
-          <p class="caption">La skill oficial de Celo. Tu coding agent ya sabe construir en la red.</p>
-        </div>
-
-        <div class="stack-block">
-          <h3>eve · Node 24+</h3>
-          <div class="cmd">
-            <pre><code><span class="prompt">$ </span>npx eve@latest init mi-agente</code></pre>
-            <button type="button" data-copy="npx eve@latest init mi-agente">Copiar</button>
-          </div>
-          <p class="caption">Agentes como carpetas. Necesitás Node 24 o más.</p>
-        </div>
-
-        <div class="stack-block">
-          <h3>Loops House</h3>
-          <div class="cmd">
-            <pre><code><span class="prompt">$ </span>npx loopshouse add agents-on-open-rails</code></pre>
-            <button type="button" data-copy="npx loopshouse add agents-on-open-rails">Copiar</button>
-          </div>
-          <p class="caption">Te suma a la hackathon. El tag de atribución te lo da la skill de Loops House al registrarte.</p>
-        </div>
-
-        <div class="stack-block">
-          <h3>Ripio Ramp · ejemplo</h3>
-          <div class="cmd">
-            <pre><code>https://ramp.ripio.com/?country=AR&amp;chain=42220&amp;token=WARS&amp;amount=10000&amp;address=0x...</code></pre>
-            <button type="button" data-copy="https://ramp.ripio.com/?country=AR&chain=42220&token=WARS&amount=10000&address=0x...">Copiar</button>
-          </div>
-          <p class="caption">On/off-ramp en moneda local por URL, sin credenciales. Este ejemplo pide 10.000 wARS en Celo, para Argentina.</p>
-        </div>
-
-        <article class="token">
-          <em>wARS · 18 decimales</em>
-          <div class="cmd">
-            <pre><code>0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d</code></pre>
-            <button type="button" data-copy="0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d">Copiar</button>
-          </div>
-          <p class="caption">Peso argentino digital de Ripio, en Celo mainnet. Verificá siempre las direcciones oficiales de los tokens. Misma dirección en otras cadenas EVM.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="cierre">
-      <div class="wrap close-grid">
-        <div>
-          <p class="label">/ Cierre · lunes 9/11, 06:00 ART</p>
-          <h2>Manos a la obra.</h2>
-          <div class="steps">
-            <article class="step"><em>01</em><b>Registrate</b><span>en Loops House.</span></article>
-            <article class="step"><em>02</em><b>Instalá la skill</b><span>y obtené tu tag.</span></article>
-            <article class="step"><em>03</em><b>Sumate</b><span>al Telegram.</span></article>
-            <article class="step"><em>04</em><b>Hacé</b><span>tu primera transacción real con tu tag.</span></article>
-          </div>
-          <div class="when">
-            <p><span>Cierre:</span> lunes 9/11, 06:00 (hora argentina)</p>
-            <p><span>Ganadores:</span> viernes 13/11</p>
-            <p><span>Office hours:</span> jueves 9:00 (hora argentina)</p>
-          </div>
-          <div class="actions">
-            <a class="cta" href="https://www.loops.house/agents-on-open-rails">Inscribite en Loops House</a>
-            <a class="cta ghost" href="https://t.me/realworldagentshackathon">Telegram</a>
-            <a class="cta ghost" href="https://docs.celo.org">docs.celo.org</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <span>Celo Core Co. × Ripio · Builder Session Jujuy</span>
-      <span>Sábado 17/10 · 18:00 a 20:00 ART</span>
     </div>
-  </footer>
+    <div class="map" aria-hidden="true">
+      <img src="assets/mapa.webp" alt="">
+      <i class="pin me" style="left:51.8%;top:11.5%"></i>
+      <i class="pin" style="left:48.6%;top:13.9%;--d:.4s"></i>
+      <i class="pin" style="left:47.2%;top:39.8%;--d:.8s"></i>
+      <i class="pin" style="left:53.9%;top:49.7%;--d:1.2s"></i>
+      <i class="pin" style="left:61.5%;top:59.2%;--d:1.6s"></i>
+      <i class="pin" style="left:61.6%;top:70.6%;--d:2s"></i>
+    </div>
+  </section>
 
-  <script>
-    (function () {
-      var status = document.getElementById("copy-status");
-      document.querySelectorAll("[data-copy]").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var text = btn.getAttribute("data-copy");
-          var done = function () {
-            var prev = btn.textContent;
-            btn.textContent = "Listo";
-            if (status) status.textContent = "Copiado";
-            window.setTimeout(function () {
-              btn.textContent = prev;
-              if (status) status.textContent = "";
-            }, 1400);
-          };
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(done).catch(function () {
-              fallback(text);
-              done();
-            });
-          } else {
-            fallback(text);
-            done();
-          }
-        });
-      });
-      function fallback(text) {
-        var area = document.createElement("textarea");
-        area.value = text;
-        area.setAttribute("readonly", "");
-        area.style.position = "fixed";
-        area.style.left = "-9999px";
-        document.body.appendChild(area);
-        area.select();
-        document.execCommand("copy");
-        document.body.removeChild(area);
-      }
-    })();
-  </script>
+  <!-- ========== 02 · La web ========== -->
+  <section class="slide s-web" data-section="1" data-title="Web1, Web2, Web3, Web4 y Web5">
+    <p class="kicker" data-in><b>/ 01 Intro</b><span class="dot">·</span>La web</p>
+    <h1 data-in>Web1, Web2, Web3, Web4 y Web5</h1>
+    <div class="grid webs" data-pick>
+      <article class="card web tap" style="--w:20" data-in>
+        <i class="bar"></i>
+        <h3>Web1</h3>
+        <p class="label">Leer</p>
+        <p>Páginas estáticas: solo las mirás. Años 90.</p>
+      </article>
+      <article class="card web tap" style="--w:40" data-in>
+        <i class="bar"></i>
+        <h3>Web2</h3>
+        <p class="label">Leer y escribir</p>
+        <p>Redes sociales y apps: las plataformas controlan tus datos y tu plata.</p>
+      </article>
+      <article class="card web tap" style="--w:60" data-in>
+        <i class="bar"></i>
+        <h3>Web3</h3>
+        <p class="label">Leer, escribir y poseer</p>
+        <p>Blockchain: vos tenés tu cuenta (wallet) y tus activos, sin intermediarios.</p>
+      </article>
+      <article class="card web tap hot" style="--w:80" data-in>
+        <i class="bar"></i>
+        <h3>Web4</h3>
+        <p class="label">La web simbiótica</p>
+        <p>Personas y agentes de IA trabajando juntos: los agentes actúan, pagan y cobran solos. De eso trata esta hackathon.</p>
+      </article>
+      <article class="card web tap" style="--w:100" data-in>
+        <i class="bar"></i>
+        <h3>Web5</h3>
+        <p class="label">Tu identidad y tus datos</p>
+        <p>Propuesta de Jack Dorsey (TBD): vos controlás tu identidad y tus datos. Comodidad de Web2 + descentralización de Web3, sin necesidad de tokens.</p>
+      </article>
+    </div>
+    <p class="foot" data-in><b>Web1-3 son etiquetas simplificadas;</b> <span class="muted">Web4 y Web5 no tienen una definición oficial única.</span></p>
+  </section>
+
+  <!-- ========== 03 · Tecnologías ========== -->
+  <section class="slide s-tech" data-section="1" data-title="Tecnologías de la Web3">
+    <p class="kicker" data-in><b>/ 01 Intro</b><span class="dot">·</span>Tecnologías</p>
+    <h1 data-in>Tecnologías de la Web3</h1>
+    <div class="grid techs" data-pick>
+      <article class="card tech tap" data-in>
+        <p class="label">Entre pares</p>
+        <h3><em>01</em>Redes P2P</h3>
+        <p>Las computadoras se conectan directo entre sí, sin un servidor central. Ejemplos: BitTorrent, IPFS.</p>
+      </article>
+      <article class="card tech tap hot" data-in>
+        <p class="label">Lo que vamos a usar hoy</p>
+        <h3><em>02</em>Blockchain</h3>
+        <p>Un libro de cuentas público, compartido por muchas computadoras. Permite wallets, tokens y contratos inteligentes.</p>
+      </article>
+      <article class="card tech tap" data-in>
+        <p class="label">Corren en tu compu</p>
+        <h3><em>03</em>Modelos de IA locales</h3>
+        <p>Modelos de IA que corrés en tu propia compu o celular, sin depender de la nube. Ejemplo: QVAC, de Tether (código abierto).</p>
+        <small>Se mezcla con Web3, pero no es Web3</small>
+      </article>
+    </div>
+    <p class="foot" data-in><b>Se pueden combinar:</b> la blockchain guarda el registro, el P2P distribuye los datos y la IA local corre en tu dispositivo.</p>
+  </section>
+
+  <!-- ========== 04 · Blockchain ========== -->
+  <section class="slide s-chain" data-section="1" data-title="¿Qué es una blockchain?">
+    <div class="cols">
+      <div>
+        <p class="kicker" data-in><b>/ 01 Intro</b><span class="dot">·</span>Blockchain</p>
+        <h1 data-in>¿Qué es una blockchain?</h1>
+        <p class="lede serif" data-in>Un libro de cuentas público</p>
+        <ul class="bullets" data-in>
+          <li>Nadie lo controla solo.</li>
+          <li>Lo que se escribe no se puede borrar ni falsificar.</li>
+          <li>Cualquiera lo puede revisar.</li>
+        </ul>
+        <p class="code-box" data-in><b>onchain</b> = anotado en la blockchain.</p>
+      </div>
+      <div class="ledger" id="ledger" data-in>
+        <div class="ledger-head">
+          <span class="label">Probalo · intentá falsificar un bloque</span>
+          <button class="pill" data-reset>Reiniciar</button>
+        </div>
+        <div class="blocks"></div>
+        <p class="ledger-foot">Cada bloque guarda la huella (hash) del anterior. Editá un movimiento y mirá qué pasa con la cadena.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 05 · Conceptos ========== -->
+  <section class="slide s-concepts" data-section="1" data-title="¿Cómo funciona?">
+    <p class="kicker" data-in><b>/ 01 Intro</b><span class="dot">·</span>Conceptos</p>
+    <h1 data-in>¿Cómo funciona?</h1>
+    <div class="grid concepts">
+      <article class="card concept" data-in>
+        <p class="label"><b>01</b>Tu cuenta</p>
+        <p class="word">Wallet</p>
+        <p class="sub">Con clave privada</p>
+        <hr>
+        <p>Tu clave privada es solo tuya: nunca se comparte.</p>
+        <div class="widget">
+          <div class="key" id="pk"><code>•••• •••• •••• •••• •••• ••••</code><button>Mostrar</button></div>
+        </div>
+      </article>
+      <article class="card concept" data-in>
+        <p class="label"><b>02</b>Plata digital</p>
+        <p class="word">Stablecoin</p>
+        <p class="sub">Un tipo de token</p>
+        <hr>
+        <p>Ejemplo: wARS es un peso argentino digital.</p>
+        <div class="widget">
+          <label class="peg">ARS <input id="ars" type="number" min="0" value="10000" aria-label="Pesos"> = <output id="wars">10.000</output> wARS</label>
+        </div>
+      </article>
+      <article class="card concept" data-in>
+        <p class="label"><b>03</b>Cada movimiento</p>
+        <p class="word">Gas</p>
+        <p class="sub">El costo de cada movimiento</p>
+        <hr>
+        <p>Cada movimiento es una transacción y cuesta una fracción mínima: el gas.</p>
+        <div class="widget">
+          <input class="range" id="gasn" type="range" min="1" max="1000" value="100" aria-label="Transacciones">
+          <div class="gasline"><span><output id="gasn-o">100</output> transacciones</span><span>≈ US$ <output id="gasn-r">0,05</output></span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 06 · Celo ========== -->
+  <section class="slide s-celo" data-section="2" data-title="¿Y Celo?">
+    <p class="kicker" data-in><b>/ 02 Celo</b><span class="dot">·</span>La red</p>
+    <h1 data-in>¿Y Celo?</h1>
+    <img class="logo-top" src="assets/logo-celo.png" alt="Celo" data-in>
+    <div class="facts">
+      <div class="fact" data-in><span class="serif">L2</span><p><b>Capa 2 de Ethereum (desde el 26/03/2025, con OP Stack):</b> procesa los pagos rápido y barato, y se apoya en Ethereum para la seguridad.</p></div>
+      <div class="fact" data-in><span class="serif">~1 s <i class="tick" title="1 bloque ≈ 1 segundo"></i></span><p><b>Bloques de ~1 segundo:</b> un bloque nuevo cada segundo, aprox.</p></div>
+      <div class="fact" data-in><span class="serif">Gas</span><p><b>Gas promedio $0.0005:</b> se puede pagar en USD₮, USDC o USDm.</p></div>
+      <div class="fact" data-in><span class="serif">wFIAT</span><p><b>Monedas locales de Ripio:</b> wARS, wBRL, wMXN… La «w» es de «wrapped»: 1:1 con la moneda real. No son moneda de curso legal.</p></div>
+    </div>
+    <div class="stats-row" data-in>
+      <div><b>20M+</b><span>Wallets de MiniPay</span></div>
+      <div><b>$6.2B</b><span>Volumen mensual en stablecoins</span></div>
+      <div><b>450K+</b><span>Usuarios activos por día</span></div>
+    </div>
+  </section>
+
+  <!-- ========== 07 · Números ========== -->
+  <section class="slide s-nums" data-section="2" data-title="Celo en números">
+    <p class="kicker" data-in><b>/ 02 Celo</b><span class="dot">·</span>En números</p>
+    <h1 data-in>Celo: la blockchain hecha para<br>finanzas reales</h1>
+    <div class="cols">
+      <div class="grid nums">
+        <div class="num" data-in><p class="serif"><span data-count="20" data-suffix="M+">20M+</span></p><p class="label">Wallets MiniPay</p></div>
+        <div class="num" data-in><p class="serif">USD <span data-count="6200" data-suffix="M">6.200M</span></p><p class="label">De volumen mensual en stablecoins</p></div>
+        <div class="num" data-in><p class="serif"><span data-count="450" data-suffix="K+">450K+</span></p><p class="label">Usuarios activos por día</p></div>
+        <div class="num" data-in><p class="serif"><span data-count="32">32</span></p><p class="label">Stablecoins globales</p></div>
+      </div>
+      <div class="card calc" data-in>
+        <h4>Calculadora de gas</h4>
+        <p class="q">Si tu agente hace…</p>
+        <p class="tx"><output id="calc-n">1.000</output><small>tx / mes</small></p>
+        <input class="range" id="calc" type="range" min="0" max="100" value="50" aria-label="Transacciones por mes">
+        <div class="res"><span class="label">Gas estimado</span><b>US$ <output id="calc-r">0,50</output></b></div>
+        <p class="fine">Con el gas promedio de $0.0005 por transacción. Es un promedio: el costo real varía.</p>
+      </div>
+    </div>
+    <p class="foot" data-in>L2 de Ethereum · bloques de 1 s · gas promedio $0.0005, pagable en USD₮, USDC o USDm</p>
+  </section>
+
+  <!-- ========== 08 · Hackathon ========== -->
+  <section class="slide s-hack" data-section="3" data-title="Agentes que cobran, pagan y liquidan">
+    <div class="cols">
+      <div>
+        <p class="kicker" data-in><b>/ 03 Hackathon</b><span class="dot">·</span>Agents on Open Rails</p>
+        <h1 data-in>Agentes que cobran, pagan y liquidan con plata real</h1>
+        <dl data-in>
+          <div><dt>ENTREGA:</dt><dd>del 6/10 al lunes 9/11, 06:00 (hora ARG)</dd></div>
+          <div><dt>DÓNDE:</dt><dd>online, en Loops House · Celo mainnet</dd></div>
+          <div><dt>GANADORES:</dt><dd>viernes 13/11</dd></div>
+        </dl>
+        <p class="any" data-in><span class="accent">/</span>&nbsp; <b>Cualquier framework de agentes;</b> podés anotarte en más de un track</p>
+        <div class="prize" data-in>
+          <div><p class="label">En premios</p><p class="serif">USD 5.000</p></div>
+          <p>en $CELO, repartidos en 4 tracks</p>
+        </div>
+      </div>
+      <div data-in>
+        <div class="cover-img"><img src="assets/hackathon.jpg" alt="Agents on Open Rails Hackathon"></div>
+        <div class="tracks-bar"><i style="--f:1;--c:var(--green)"></i><i style="--f:1;--c:var(--purple)"></i><i style="--f:1;--c:var(--lavender)"></i><i style="--f:1;--c:var(--orange)"></i></div>
+        <div class="cd-label"><span class="label">Cierre en</span><span class="label dim">lun 9/11 · 06:00 ART</span></div>
+        <div class="countdown" data-countdown></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 09 · wFIAT ========== -->
+  <section class="slide s-fiat" data-section="4" data-title="Stablecoins locales">
+    <div class="cols">
+      <div>
+        <p class="kicker" data-in><b>/ 04 Tracks</b><span class="dot">·</span>Track 1: Stable Agents: LatAm</p>
+        <h1 data-in>Las stablecoins locales son la última milla para los agentes onchain</h1>
+        <p class="note" data-in>En LatAm mover plata casi siempre implica pasar por el dólar, con comisiones en cada paso.</p>
+        <div class="card route" id="route" data-in>
+          <div class="tabs">
+            <button class="pill on" data-mode="hoy">Hoy</button>
+            <button class="pill" data-mode="onchain">Con wFIAT</button>
+          </div>
+          <div class="path"></div>
+          <p class="cap"></p>
+        </div>
+        <p class="where" data-in>/&nbsp; En Celo mainnet · misma dirección en otras EVM</p>
+      </div>
+      <div>
+        <div class="grid fiats" data-in>
+          <div class="card fiat tap"><b>wARS</b><span>Argentina · peso</span></div>
+          <div class="card fiat tap"><b>wBRL</b><span>Brasil · real</span></div>
+          <div class="card fiat tap"><b>wMXN</b><span>México · peso</span></div>
+          <div class="card fiat tap"><b>wCOP</b><span>Colombia · peso</span></div>
+          <div class="card fiat tap"><b>wCLP</b><span>Chile · peso</span></div>
+          <div class="card fiat tap"><b>wPEN</b><span>Perú · sol</span></div>
+        </div>
+        <p class="label under" data-in>wFIAT de Ripio · 1:1 con la moneda real</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 10 · Tracks ========== -->
+  <section class="slide s-tracks" data-section="4" data-title="4 tracks, US$5.000 en $CELO">
+    <p class="kicker" data-in><b>/ 04 Tracks</b><span class="dot">·</span>4 formas de ganar</p>
+    <h1 data-in>4 tracks, US$5.000 en $CELO</h1>
+    <div class="split" data-in>
+      <button style="--f:2000;--c:var(--green)" data-t="0">T1 · $2.000</button>
+      <button style="--f:1000;--c:var(--purple)" data-t="1">T2A · $1.000</button>
+      <button style="--f:1000;--c:var(--lavender)" data-t="2">T2B · $1.000</button>
+      <button style="--f:1000;--c:var(--orange)" data-t="3">T3 · $1.000</button>
+    </div>
+    <div class="grid tracks" id="tracks">
+      <article class="card track tap" style="--c:var(--green)" data-in data-go="11">
+        <div class="img"><img src="assets/track-1.jpg" alt="Track 1"></div>
+        <div class="body">
+          <p class="label">Track 1 · Ripio × Celo</p>
+          <h3>Stable Agents: LatAm</h3>
+          <p>Cobran, pagan, ahorran y liquidan en las stablecoins locales de Ripio</p>
+          <p class="amt">$1.500 · $500</p>
+        </div>
+      </article>
+      <article class="card track tap" style="--c:var(--purple)" data-in>
+        <div class="img"><img src="assets/track-2a.jpg" alt="Track 2A"></div>
+        <div class="body">
+          <p class="label">Track 2A · Textile</p>
+          <h3>Open Corridors: FX</h3>
+          <p>Cotizan y liquidan FX en Textile, un mercado de cambio onchain</p>
+          <p class="amt">$750 · $250</p>
+        </div>
+      </article>
+      <article class="card track tap" style="--c:var(--lavender)" data-in>
+        <div class="img"><img src="assets/track-2b.jpg" alt="Track 2B"></div>
+        <div class="body">
+          <p class="label">Track 2B · Celo x402</p>
+          <h3>Open Corridors: USA₮ con x402</h3>
+          <p>Usuarios reales que liquidan USA₮ con el facilitador x402 de Celo</p>
+          <p class="amt">$750 · $250</p>
+        </div>
+      </article>
+      <article class="card track tap" style="--c:var(--orange)" data-in>
+        <div class="img"><img src="assets/track-3.jpg" alt="Track 3"></div>
+        <div class="body">
+          <p class="label">Track 3 · buy</p>
+          <h3>Build with buy</h3>
+          <p>Productos que pagan por servicios que no son suyos: cómputo, browsers, datos, inferencia</p>
+          <p class="amt">$1.000<small>Entre 5 proyectos</small></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 11 · Track LatAm ========== -->
+  <section class="slide s-latam" data-section="4" data-title="Track LatAm">
+    <div class="cols">
+      <div>
+        <p class="kicker" data-in><b>/ 04 Tracks</b><span class="dot">·</span>Track 1 · Ripio × Celo</p>
+        <h1 data-in>Track LatAm</h1>
+        <div class="places" data-in>
+          <div><p class="label">1er puesto</p><p class="serif">USD 1.500</p></div>
+          <div><p class="label">2do puesto</p><p class="serif">USD 500</p></div>
+        </div>
+        <div class="steps" data-check="latam" data-in>
+          <div class="step"><em>01</em><span>Corre en Celo mainnet y mueve wFIAT real de Ripio</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+          <div class="step"><em>02</em><span>Tag de atribución en cada transacción: «una transacción sin tu tag nunca se puede contar después»</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+          <div class="step"><em>03</em><span>El tag te lo da la skill de Loops House al registrarte</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+          <div class="step"><em>04</em><span>Usuarios reales en LatAm y un camino claro para crecer después del hackathon</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+        </div>
+      </div>
+      <div data-in>
+        <div class="cover-img"><img src="assets/track-1-ripio.jpg" alt="Track 1 · Stable Agents: LatAm with Ripio"></div>
+        <div class="logos">
+          <img src="assets/logo-celo.png" alt="Celo" height="34">
+          <span class="sep"></span>
+          <img src="assets/logo-ripio.png" alt="Ripio" height="38">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 12 · Evaluación ========== -->
+  <section class="slide s-eval" data-section="4" data-title="Cómo te evalúan">
+    <p class="kicker" data-in><b>/ 04 Tracks</b><span class="dot">·</span>Track 1 · Cómo se evalúa</p>
+    <h1 data-in>Cómo te evalúan</h1>
+    <div class="cols">
+      <div id="crits" data-in>
+        <div class="crit"><em>01</em><p><strong>Funciona en mainnet con wFIAT real</strong> <span>(verificado por tu tag)</span></p><div class="rate"></div></div>
+        <div class="crit"><em>02</em><p><strong>Uso real de wFIAT y del stack Celo:</strong> <span>ERC-8004, x402, gas en stablecoins, MiniPay</span></p><div class="rate"></div></div>
+        <div class="crit"><em>03</em><p><strong>Autonomía:</strong> <span>el agente actúa solo y le ahorra tiempo o plata a alguien concreto</span></p><div class="rate"></div></div>
+        <div class="crit"><em>04</em><p><strong>UX</strong> <span>que alguien nuevo en cripto pueda usar, con montos en su moneda</span></p><div class="rate"></div></div>
+        <div class="crit"><em>05</em><p><strong>Impacto en LatAm:</strong> <span>una necesidad real y para quién es</span></p><div class="rate"></div></div>
+      </div>
+      <div class="card score" data-in>
+        <p class="serif">20% c/u</p>
+        <p class="label">5 criterios, mismo peso</p>
+        <div class="meter"><i id="meter"></i></div>
+        <div class="you"><span class="label">Autoevaluación</span><b><output id="score">0</output>%</b></div>
+        <p class="msg" id="score-msg">Puntuá tu proyecto de 1 a 5 en cada criterio.</p>
+        <button class="pill reset" id="score-reset">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 13 · Reglas ========== -->
+  <section class="slide s-rules" data-section="3" data-title="Requisitos que te pueden dejar afuera">
+    <p class="kicker" data-in><b>/ 03 Hackathon</b><span class="dot">·</span>Reglas</p>
+    <h1 data-in>Requisitos que te pueden dejar afuera</h1>
+    <div class="grid rules" data-check="rules">
+      <article class="card rule" style="--c:var(--yellow)" data-in>
+        <div class="top"><p class="label">Mainnet</p><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+        <p><b>Solo cuenta lo que pasa en Celo mainnet.</b> Tener testnet en el repo está bien.</p>
+      </article>
+      <article class="card rule" style="--c:var(--green)" data-in>
+        <div class="top"><p class="label">Tag · ERC-8021</p><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+        <p><b>Attribution tag ERC-8021 en el calldata de cada transacción,</b> en el cliente de la wallet (no en el contrato). Lo que mandes sin tag no se puede acreditar después.</p>
+      </article>
+      <article class="card rule" style="--c:var(--green)" data-in>
+        <div class="top"><p class="label">ERC-8004</p><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+        <p><b>Obligatorio en todos los tracks:</b> tu agente registra su identidad desde su propia wallet antes del cierre.</p>
+      </article>
+      <article class="card rule" style="--c:var(--yellow)" data-in>
+        <div class="top"><p class="label">Repo</p><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+        <p><b>Público en GitHub desde la inscripción</b> y accesible hasta el juzgamiento. Código escrito durante la hackathon.</p>
+      </article>
+    </div>
+    <div class="bottom" data-in>
+      <p><b>Un premio por track por equipo.</b> Si tu relayer paga el gas, contalo en la entrega: no cuenta como aporte del builder.</p>
+    </div>
+    <p class="dates" data-in>CIERRE: <b>lunes 9/11, 06:00 ART</b><i>·</i>GANADORES: <b>viernes 13/11</b><i>·</i><span class="ready" id="rules-ready"><b>0</b>/4 listos</span></p>
+  </section>
+
+  <!-- ========== 14 · Ideas ========== -->
+  <section class="slide s-ideas" data-section="5" data-title="¿Qué agente podrías construir?">
+    <p class="kicker" data-in><b>/ 05 Construir</b><span class="dot">·</span>Ideas</p>
+    <h1 data-in>¿Qué agente podrías construir?</h1>
+    <div class="grid ideas" id="ideas" data-pick>
+      <article class="card idea tap" data-in><h4><em>01</em>Cobrador</h4><p>emite cobros en wARS, avisa por WhatsApp y concilia cuando entra el pago</p></article>
+      <article class="card idea tap" data-in><h4><em>02</em>Remesas sin dólar</h4><p>manda wARS a Brasil y llega como wBRL, sin pasar por USD</p></article>
+      <article class="card idea tap" data-in><h4><em>03</em>Ahorro automático</h4><p>separa un porcentaje de cada cobro apenas entra</p></article>
+      <article class="card idea tap" data-in><h4><em>04</em>Pago a proveedores</h4><p>paga facturas recurrentes en la moneda de cada país, con tus límites</p></article>
+      <article class="card idea tap" data-in><h4><em>05</em>Gastos compartidos</h4><p>divide los gastos de un viaje y liquida a cada uno en su moneda</p></article>
+      <article class="card idea tap" data-in><h4><em>06</em>Comercio en el chat</h4><p>un bot de Telegram que vende y cobra en moneda local</p></article>
+    </div>
+    <div class="actions" data-in>
+      <span class="btn">Podés anotarte en más de un track</span>
+      <button class="btn ghost" id="dice">⚄ Elegí una al azar</button>
+    </div>
+  </section>
+
+  <!-- ========== 15 · Stack ========== -->
+  <section class="slide s-stack" data-section="5" data-title="Tu stack para arrancar">
+    <p class="kicker" data-in><b>/ 05 Construir</b><span class="dot">·</span>Stack</p>
+    <h1 data-in>Tu stack para arrancar</h1>
+    <div class="grid stack">
+      <article class="card tool" data-in>
+        <h3>Celopedia</h3>
+        <p class="src">skill oficial de Celo</p>
+        <p>Tu coding agent ya sabe construir en Celo.</p>
+      </article>
+      <a class="card tool tap" href="https://eve.dev" target="_blank" rel="noopener" data-in>
+        <h3>eve de Vercel</h3>
+        <p class="src">eve.dev · Node 24+</p>
+        <p>Agentes como carpetas; se deploya en Vercel.</p>
+        <span class="go">Abrir ↗</span>
+      </a>
+      <a class="card tool tap" href="https://ramp.ripio.com" target="_blank" rel="noopener" data-in>
+        <h3>Ripio Ramp</h3>
+        <p class="src">ramp.ripio.com</p>
+        <p>On/off-ramp en moneda local por URL, sin credenciales.</p>
+        <span class="go">Abrir ↗</span>
+      </a>
+      <a class="card tool tap" href="https://bridge.ripio.com" target="_blank" rel="noopener" data-in>
+        <h3>Ripio Bridge</h3>
+        <p class="src">bridge.ripio.com</p>
+        <p>Mové wFIAT entre cadenas: usalo como dapp o integralo con /developers.</p>
+        <span class="go">Abrir ↗</span>
+      </a>
+    </div>
+    <p class="label mt" data-in>Para arrancar · clic para copiar</p>
+    <div class="grid cmds" data-in>
+      <button class="cmd" data-copy="npx skills add celo-org/celopedia-skills"><span class="p">$</span><code>npx skills add celo-org/celopedia-skills</code><small>Celopedia</small></button>
+      <button class="cmd" data-copy="npx eve@latest init mi-agente"><span class="p">$</span><code>npx eve@latest init mi-agente</code><small>eve · Node 24+</small></button>
+    </div>
+    <ul class="bullets" data-in>
+      <li><span><b>Verificá siempre</b> las direcciones oficiales de los tokens</span></li>
+      <li><span><b>Contexto para tu coding agent:</b> eve.dev/llms.txt y docs.ripio.com/llms.txt</span></li>
+      <li><span><b>Office hours:</b> jueves 9:00 (hora ARG)</span></li>
+    </ul>
+  </section>
+
+  <!-- ========== 16 · Sedes ========== -->
+  <section class="slide s-sedes" data-section="6" data-title="Builder Sessions · sábado 17/10">
+    <div class="cols">
+      <div>
+        <p class="kicker" data-in><b>/ 06 Cierre</b><span class="dot">·</span>Builder Sessions</p>
+        <h1 data-in>Builder Sessions · sábado<br>17/10, 18:00</h1>
+        <div class="card venue hot" data-in>
+          <p class="label" id="venue-label">Tu sede</p>
+          <div><h3 id="venue-city">Jujuy</h3><p id="venue-host">Franco Durán (jujuy.dev)</p></div>
+        </div>
+        <div class="card venue" data-in>
+          <p class="label">Dudas</p>
+          <div><h3>Telegram del hackathon</h3><p><a href="https://t.me/realworldagentshackathon" target="_blank" rel="noopener">t.me/realworldagentshackathon</a> — el equipo DevRel de Celo responde ahí</p></div>
+        </div>
+        <div class="cities" id="cities" data-in></div>
+        <p class="foot" data-in><b>Seis ciudades en simultáneo.</b> Tocá una ciudad en el mapa para ver quién la organiza.</p>
+      </div>
+      <div class="map" id="sedes-map" data-in>
+        <img src="assets/mapa.webp" alt="Mapa de Argentina con las seis sedes">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 17 · Cierre ========== -->
+  <section class="slide s-end" data-section="6" data-title="No procrastinen: son 5 semanas">
+    <div class="rails" data-in><img src="assets/rails-tall.jpg" alt=""></div>
+    <p class="kicker" data-in style="--accent:var(--yellow)"><b>/ 06 Cierre</b><span class="dot">·</span>Manos a la obra</p>
+    <h1 data-in>No procrastinen:<br><span>son 5 semanas</span></h1>
+    <div class="todo" data-check="todo" data-in>
+      <div class="step"><em>01</em><span>Registrate en Loops House</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+      <div class="step"><em>02</em><span>Instalá la skill del hackathon y obtené tu tag</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+      <div class="step"><em>03</em><span>Sumate al Telegram</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+      <div class="step"><em>04</em><span>Hacé tu primera transacción real con tu tag</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+    </div>
+    <div class="tail" data-in>
+      <dl>
+        <div><dt>/ Cierre:</dt> <dd>lunes 9/11, 06:00 (hora ARG)</dd></div>
+        <div><dt>/ Ganadores:</dt> <dd>viernes 13/11</dd></div>
+      </dl>
+      <div class="countdown" data-countdown></div>
+    </div>
+  </section>
+
+  <!-- ========== UI ========== -->
+  <div class="hint" id="hint"><kbd>←</kbd><kbd>→</kbd> navegar &nbsp; <kbd>O</kbd> índice &nbsp; <kbd>F</kbd> pantalla completa</div>
+
+  <div class="dock">
+    <button id="prev" aria-label="Anterior"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></button>
+    <button id="next" aria-label="Siguiente"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></button>
+    <button id="grid" aria-label="Índice (O)"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="5" height="5"/><rect x="9" y="2" width="5" height="5"/><rect x="2" y="9" width="5" height="5"/><rect x="9" y="9" width="5" height="5"/></svg></button>
+    <button id="full" aria-label="Pantalla completa (F)"><svg viewBox="0 0 16 16"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg></button>
+  </div>
+
+  <div class="overview" id="overview" aria-hidden="true">
+    <header><h2>Índice</h2><span class="label">Esc para cerrar</span></header>
+    <div class="thumbs" id="thumbs"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</main>
+</div>
+<script src="deck.js"></script>
 </body>
 </html>
