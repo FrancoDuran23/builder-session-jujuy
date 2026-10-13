@@ -2,30 +2,31 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Builder Session Jujuy · Agents on Open Rails</title>
 <meta name="description" content="Builder Session Jujuy · Agents on Open Rails Hackathon (Celo × Ripio) · sábado 17/10, 18:00">
-<meta name="theme-color" content="#09090b">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%2309090b'/><rect x='4' y='4' width='8' height='8' fill='%2335d07f'/></svg>">
+<meta name="theme-color" content="#0b0b0d">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%230b0b0d'/><rect x='4' y='4' width='8' height='8' fill='%2335d07f'/></svg>">
+<link rel="preload" href="fonts/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/JetBrainsMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="deck.css?v=3">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="deck.css?v=4">
 </head>
 <body>
-<div class="viewport">
+<div class="viewport" id="viewport">
 <main class="stage" id="stage" data-cover="true">
 
-  <!-- ========== Header global ========== -->
   <header class="chrome">
     <div class="brand"><i></i>Agents on Open Rails · Builder Session Jujuy</div>
     <nav class="progress" id="progress" aria-label="Secciones"></nav>
     <div class="counter" id="counter"><b>01</b> / 19</div>
   </header>
 
-  <!-- ========== 01 · Portada ========== -->
+  <!-- 01 · Portada -->
   <section class="slide s-cover" data-section="0" data-title="Builder Session">
-    <div class="left">
+    <div class="cover-left">
       <p class="eyebrow serif" data-in>Agents on Open Rails Hackathon</p>
       <h1 class="big" data-in><span>Builder</span><span>Session</span></h1>
       <p class="duo" data-in>/ CELO × RIPIO</p>
@@ -35,12 +36,12 @@
         <div><dt>HOST:</dt><dd>Franco Durán · jujuy.dev</dd></div>
       </dl>
       <div class="logos" data-in>
-        <img src="assets/logo-celo.png" alt="Celo" height="36">
+        <img src="assets/logo-celo.png" alt="Celo" class="l-celo">
         <span class="sep"></span>
-        <img src="assets/logo-ripio.png" alt="Ripio" height="40">
+        <img src="assets/logo-ripio.png" alt="Ripio" class="l-ripio">
       </div>
     </div>
-    <div class="map" aria-hidden="true">
+    <div class="map cover-map" aria-hidden="true">
       <img src="assets/mapa.webp" alt="">
       <i class="pin me" style="left:51.8%;top:11.5%"></i>
       <i class="pin" style="left:48.6%;top:13.9%;--d:.4s"></i>
@@ -51,69 +52,36 @@
     </div>
   </section>
 
-  <!-- ========== 02 · La web ========== -->
+  <!-- 02 · La web -->
   <section class="slide s-web" data-section="1" data-title="Web1, Web2, Web3 y Web4">
-    <p class="kicker" data-in><b>/ 01 Intro</b><span class="dot">·</span>La web</p>
+    <p class="kicker" data-in><b>/ 01 INTRO</b><span>·</span>La web</p>
     <h1 data-in>Web1, Web2, Web3 y Web4</h1>
-    <div class="grid webs" data-pick>
-      <article class="card web tap" style="--w:25" data-in>
-        <i class="bar"></i>
-        <h3>Web1</h3>
-        <p class="label">Leer</p>
-        <p>Páginas estáticas: solo las mirás. Años 90.</p>
-      </article>
-      <article class="card web tap" style="--w:50" data-in>
-        <i class="bar"></i>
-        <h3>Web2</h3>
-        <p class="label">Leer y escribir</p>
-        <p>Redes sociales y apps: las plataformas controlan tus datos y tu plata.</p>
-      </article>
-      <article class="card web tap" style="--w:75" data-in>
-        <i class="bar"></i>
-        <h3>Web3</h3>
-        <p class="label">Leer, escribir y poseer</p>
-        <p>Blockchain: vos tenés tu cuenta (wallet) y tus activos, sin intermediarios.</p>
-      </article>
-      <article class="card web tap hot" style="--w:100" data-in>
-        <i class="bar"></i>
-        <h3>Web4</h3>
-        <p class="label">La web simbiótica</p>
-        <p>Personas y agentes de IA trabajando juntos: los agentes actúan, pagan y cobran solos. De eso trata esta hackathon.</p>
-      </article>
+    <div class="row webs" data-pick>
+      <article class="card web tap" data-in><i class="bar" style="--w:25"></i><h3>Web1</h3><p class="lbl">Leer</p><p>Páginas estáticas: solo las mirás. Años 90.</p></article>
+      <article class="card web tap" data-in><i class="bar" style="--w:50"></i><h3>Web2</h3><p class="lbl">Leer y escribir</p><p>Redes sociales y apps: las plataformas controlan tus datos y tu plata.</p></article>
+      <article class="card web tap" data-in><i class="bar" style="--w:75"></i><h3>Web3</h3><p class="lbl">Leer, escribir y poseer</p><p>Blockchain: vos tenés tu cuenta (wallet) y tus activos, sin intermediarios.</p></article>
+      <article class="card web tap hot" data-in><i class="bar" style="--w:100"></i><h3>Web4</h3><p class="lbl">La web simbiótica</p><p>Personas y agentes de IA trabajando juntos: los agentes actúan, pagan y cobran solos. De eso trata esta hackathon.</p></article>
     </div>
-    <p class="foot" data-in><b>Web1-3 son etiquetas simplificadas;</b> <span class="muted">Web4 no tiene una definición oficial única.</span></p>
+    <p class="foot" data-in><b>Web1-3 son etiquetas simplificadas;</b> Web4 no tiene una definición oficial única.</p>
   </section>
 
-  <!-- ========== 03 · Tecnologías ========== -->
+  <!-- 03 · Tecnologías -->
   <section class="slide s-tech" data-section="1" data-title="Tecnologías de la Web3">
-    <p class="kicker" data-in><b>/ 01 Intro</b><span class="dot">·</span>Tecnologías</p>
+    <p class="kicker" data-in><b>/ 01 INTRO</b><span>·</span>Tecnologías</p>
     <h1 data-in>Tecnologías de la Web3</h1>
-    <div class="grid techs" data-pick>
-      <article class="card tech tap" data-in>
-        <p class="label">Entre pares</p>
-        <h3><em>01</em>Redes P2P</h3>
-        <p>Las computadoras se conectan directo entre sí, sin un servidor central. Ejemplos: BitTorrent, IPFS.</p>
-      </article>
-      <article class="card tech tap hot" data-in>
-        <p class="label">Lo que vamos a usar hoy</p>
-        <h3><em>02</em>Blockchain</h3>
-        <p>Un libro de cuentas público, compartido por muchas computadoras. Permite wallets, tokens y contratos inteligentes.</p>
-      </article>
-      <article class="card tech tap" data-in>
-        <p class="label">Corren en tu compu</p>
-        <h3><em>03</em>Modelos de IA locales</h3>
-        <p>Modelos de IA que corrés en tu propia compu o celular, sin depender de la nube. Ejemplo: QVAC, de Tether (código abierto).</p>
-        <small>Se mezcla con Web3, pero no es Web3</small>
-      </article>
+    <div class="row techs" data-pick>
+      <article class="card tech tap" data-in><p class="lbl">Entre pares</p><h3><em>01</em>Redes P2P</h3><p>Las computadoras se conectan directo entre sí, sin un servidor central. Ejemplos: BitTorrent, IPFS.</p></article>
+      <article class="card tech tap hot" data-in><p class="lbl">Lo que vamos a usar hoy</p><h3><em>02</em>Blockchain</h3><p>Un libro de cuentas público, compartido por muchas computadoras. Permite wallets, tokens y contratos inteligentes.</p></article>
+      <article class="card tech tap" data-in><p class="lbl">Corren en tu compu</p><h3><em>03</em>Modelos de IA locales</h3><p>Modelos de IA que corrés en tu propia compu o celular, sin depender de la nube. Ejemplo: QVAC, de Tether (código abierto).</p><small>Se mezcla con Web3, pero no es Web3</small></article>
     </div>
     <p class="foot" data-in><b>Se pueden combinar:</b> la blockchain guarda el registro, el P2P distribuye los datos y la IA local corre en tu dispositivo.</p>
   </section>
 
-  <!-- ========== 04 · Blockchain ========== -->
+  <!-- 04 · Blockchain -->
   <section class="slide s-chain" data-section="1" data-title="¿Qué es una blockchain?">
     <div class="cols">
       <div>
-        <p class="kicker" data-in><b>/ 01 Intro</b><span class="dot">·</span>Blockchain</p>
+        <p class="kicker" data-in><b>/ 01 INTRO</b><span>·</span>Blockchain</p>
         <h1 data-in>¿Qué es una blockchain?</h1>
         <p class="lede serif" data-in>Un libro de cuentas público</p>
         <ul class="bullets" data-in>
@@ -124,46 +92,36 @@
         <p class="code-box" data-in><b>onchain</b> = anotado en la blockchain.</p>
       </div>
       <div class="ledger" id="ledger" data-in>
-        <div class="ledger-head">
-          <span class="label">Probalo · intentá falsificar un bloque</span>
-          <button class="pill" data-reset>Reiniciar</button>
-        </div>
+        <div class="ledger-head"><span class="lbl">Probalo: falsificá un bloque</span><button class="pill" data-reset>Reiniciar</button></div>
         <div class="blocks"></div>
-        <p class="ledger-foot">Cada bloque guarda la huella (hash) del anterior. Editá un movimiento y mirá qué pasa con la cadena.</p>
+        <p class="ledger-foot">Cada bloque guarda la huella (hash) del anterior. Editá un movimiento y mirá qué pasa.</p>
       </div>
     </div>
   </section>
 
-  <!-- ========== 05 · Conceptos ========== -->
+  <!-- 05 · Conceptos -->
   <section class="slide s-concepts" data-section="1" data-title="¿Cómo funciona?">
-    <p class="kicker" data-in><b>/ 01 Intro</b><span class="dot">·</span>Conceptos</p>
+    <p class="kicker" data-in><b>/ 01 INTRO</b><span>·</span>Conceptos</p>
     <h1 data-in>¿Cómo funciona?</h1>
-    <div class="grid concepts">
+    <div class="row concepts">
       <article class="card concept" data-in>
-        <p class="label"><b>01</b>Tu cuenta</p>
-        <p class="word">Wallet</p>
+        <p class="lbl"><b>01</b>Tu cuenta</p>
+        <p class="word serif">Wallet</p>
         <p class="sub">Con clave privada</p>
-        <hr>
         <p>Tu clave privada es solo tuya: nunca se comparte.</p>
-        <div class="widget">
-          <div class="key" id="pk"><code>•••• •••• •••• •••• •••• ••••</code><button>Mostrar</button></div>
-        </div>
+        <div class="widget key" id="pk"><code>•••• •••• •••• •••• ••••</code><button>Mostrar</button></div>
       </article>
       <article class="card concept" data-in>
-        <p class="label"><b>02</b>Plata digital</p>
-        <p class="word">Stablecoin</p>
+        <p class="lbl"><b>02</b>Plata digital</p>
+        <p class="word serif">Stablecoin</p>
         <p class="sub">Un tipo de token</p>
-        <hr>
         <p>Ejemplo: wARS es un peso argentino digital.</p>
-        <div class="widget">
-          <label class="peg">ARS <input id="ars" type="number" min="0" value="10000" aria-label="Pesos"> = <output id="wars">10.000</output> wARS</label>
-        </div>
+        <label class="widget peg">ARS <input id="ars" type="number" min="0" value="10000" aria-label="Pesos"> = <output id="wars">10.000</output> wARS</label>
       </article>
       <article class="card concept" data-in>
-        <p class="label"><b>03</b>Cada movimiento</p>
-        <p class="word">Gas</p>
+        <p class="lbl"><b>03</b>Cada movimiento</p>
+        <p class="word serif">Gas</p>
         <p class="sub">El costo de cada movimiento</p>
-        <hr>
         <p>Cada movimiento es una transacción y cuesta una fracción mínima: el gas.</p>
         <div class="widget">
           <input class="range" id="gasn" type="range" min="1" max="1000" value="100" aria-label="Transacciones">
@@ -173,100 +131,62 @@
     </div>
   </section>
 
-  <!-- ========== 06 · Para qué sirve ========== -->
+  <!-- 06 · Para qué sirve -->
   <section class="slide s-why" data-section="1" data-title="¿Para qué sirve la Web3?">
-    <div class="why-head">
+    <div class="head-row">
       <div>
-        <p class="kicker" data-in><b>/ 01 Intro</b><span class="dot">·</span>Ventajas</p>
+        <p class="kicker" data-in><b>/ 01 INTRO</b><span>·</span>Ventajas</p>
         <h1 data-in>¿Para qué sirve la Web3?</h1>
       </div>
-      <div class="vs" id="vs" data-in role="group" aria-label="Comparar">
+      <div class="vs" data-in>
         <button class="pill" data-vs="web2">Con un banco / app</button>
         <button class="pill on" data-vs="web3">Con Web3</button>
       </div>
     </div>
-    <div class="grid perks" id="perks">
-      <article class="card perk tap" data-in>
-        <p class="label"><b>01</b>Propiedad</p>
-        <h3>Tu plata es tuya</h3>
-        <p data-web2>El banco o la app te puede congelar la cuenta o limitar lo que hacés.</p>
-        <p data-web3>Con tu wallet, nadie más puede mover tus fondos. Ni siquiera la app que usás.</p>
-      </article>
-      <article class="card perk tap" data-in>
-        <p class="label"><b>02</b>Pagos globales</p>
-        <h3>Al instante, a cualquier lado</h3>
-        <p data-web2>Mandar plata a otro país tarda días y cobra comisiones en cada paso.</p>
-        <p data-web3>Mandás a cualquier parte del mundo en segundos, 24/7, por centavos.</p>
-      </article>
-      <article class="card perk tap" data-in>
-        <p class="label"><b>03</b>Abierto</p>
-        <h3>Sin pedir permiso</h3>
-        <p data-web2>Necesitás que un banco te acepte como cliente, y no todos pueden.</p>
-        <p data-web3>Solo necesitás internet y una wallet. Funciona igual para todos.</p>
-      </article>
-      <article class="card perk tap" data-in>
-        <p class="label"><b>04</b>Transparente</p>
-        <h3>Se puede verificar</h3>
-        <p data-web2>Confiás en lo que te dice la empresa sobre tu saldo y tus movimientos.</p>
-        <p data-web3>Cada movimiento queda registrado en público: cualquiera lo puede revisar.</p>
-      </article>
-      <article class="card perk tap" data-in>
-        <p class="label"><b>05</b>Programable</p>
-        <h3>Plata con reglas</h3>
-        <p data-web2>Cada pago depende de que una persona o un sistema cerrado lo apruebe.</p>
-        <p data-web3>Contratos inteligentes: reglas que se ejecutan solas, sin intermediario. Ideal para agentes.</p>
-      </article>
-      <article class="card perk tap" data-in>
-        <p class="label"><b>06</b>Combinable</p>
-        <h3>Piezas de Lego</h3>
-        <p data-web2>Cada app es un jardín cerrado, con sus propias reglas y permisos.</p>
-        <p data-web3>Cualquier app puede usar wallets, tokens y contratos de otras. Construís sobre lo que ya existe.</p>
-      </article>
+    <div class="row perks">
+      <article class="card perk" data-in><p class="lbl"><b>01</b>Propiedad</p><h3>Tu plata es tuya</h3><p data-web2>El banco o la app te puede congelar la cuenta o limitar lo que hacés.</p><p data-web3>Con tu wallet, nadie más puede mover tus fondos. Ni siquiera la app que usás.</p></article>
+      <article class="card perk" data-in><p class="lbl"><b>02</b>Pagos globales</p><h3>Al instante, a cualquier lado</h3><p data-web2>Mandar plata a otro país tarda días y cobra comisiones en cada paso.</p><p data-web3>Mandás a cualquier parte del mundo en segundos, 24/7, por centavos.</p></article>
+      <article class="card perk" data-in><p class="lbl"><b>03</b>Abierto</p><h3>Sin pedir permiso</h3><p data-web2>Necesitás que un banco te acepte como cliente, y no todos pueden.</p><p data-web3>Solo necesitás internet y una wallet. Funciona igual para todos.</p></article>
+      <article class="card perk" data-in><p class="lbl"><b>04</b>Transparente</p><h3>Se puede verificar</h3><p data-web2>Confiás en lo que te dice la empresa sobre tu saldo y tus movimientos.</p><p data-web3>Cada movimiento queda registrado en público: cualquiera lo puede revisar.</p></article>
+      <article class="card perk" data-in><p class="lbl"><b>05</b>Programable</p><h3>Plata con reglas</h3><p data-web2>Cada pago depende de que una persona o un sistema cerrado lo apruebe.</p><p data-web3>Contratos inteligentes: reglas que se ejecutan solas, sin intermediario. Ideal para agentes.</p></article>
+      <article class="card perk" data-in><p class="lbl"><b>06</b>Combinable</p><h3>Piezas de Lego</h3><p data-web2>Cada app es un jardín cerrado, con sus propias reglas y permisos.</p><p data-web3>Cualquier app puede usar wallets, tokens y contratos de otras. Construís sobre lo que ya existe.</p></article>
     </div>
     <p class="foot" data-in><b>Ojo:</b> no todo necesita blockchain. Sirve cuando querés mover plata o guardar registros sin depender de un intermediario.</p>
   </section>
 
-  <!-- ========== 07 · Por qué ahora ========== -->
+  <!-- 07 · Por qué ahora -->
   <section class="slide s-now" data-section="1" data-title="¿Por qué se habla tanto ahora?">
-    <p class="kicker" data-in><b>/ 01 Intro</b><span class="dot">·</span>Contexto</p>
+    <p class="kicker" data-in><b>/ 01 INTRO</b><span>·</span>Contexto</p>
     <h1 data-in>¿Por qué se habla tanto ahora?</h1>
     <div class="cols">
       <div class="reasons" id="reasons" data-in>
-        <article class="reason open">
-          <button class="r-head"><em>01</em><span>Las stablecoins se volvieron plata de verdad</span><i class="chev"></i></button>
-          <div class="r-body"><p>Dólares y pesos digitales que no suben y bajan como bitcoin. Hoy se usan para pagar, ahorrar y mandar remesas. Solo en Celo se mueven <b>USD 6.200M por mes</b> en stablecoins.</p></div>
-        </article>
-        <article class="reason">
-          <button class="r-head"><em>02</em><span>Llegaron las reglas</span><i class="chev"></i></button>
-          <div class="r-body"><p>Estados Unidos aprobó en 2025 la <b>ley GENIUS</b> para regular las stablecoins, y Europa ya tiene <b>MiCA</b>. Con reglas claras, bancos y fintechs se animan a entrar.</p></div>
-        </article>
-        <article class="reason">
-          <button class="r-head"><em>03</em><span>Los grandes se subieron</span><i class="chev"></i></button>
-          <div class="r-body"><p><b>Stripe, Visa, Mastercard y PayPal</b> ya mueven o emiten stablecoins. Acá, <b>Ripio</b> emite monedas locales digitales: wARS, wBRL, wMXN…</p></div>
-        </article>
-        <article class="reason">
-          <button class="r-head"><em>04</em><span>Los agentes de IA necesitan una billetera</span><i class="chev"></i></button>
-          <div class="r-body"><p>Un agente no puede abrir una cuenta en un banco, pero sí tener una wallet: <b>cobrar, pagar y liquidar solo</b>, a cualquier hora y por centavos. Estándares como <b>x402</b> (pagos por HTTP) y <b>ERC-8004</b> (identidad de agentes) lo hacen posible.</p></div>
-        </article>
+        <article class="reason open"><button class="r-head"><em>01</em><span>Las stablecoins se volvieron plata de verdad</span><i class="chev"></i></button><div class="r-body"><p>Dólares y pesos digitales que no suben y bajan como bitcoin. Hoy se usan para pagar, ahorrar y mandar remesas. Solo en Celo se mueven <b>USD 6.200M por mes</b> en stablecoins.</p></div></article>
+        <article class="reason"><button class="r-head"><em>02</em><span>Llegaron las reglas</span><i class="chev"></i></button><div class="r-body"><p>Estados Unidos aprobó en 2025 la <b>ley GENIUS</b> para regular las stablecoins, y Europa ya tiene <b>MiCA</b>. Con reglas claras, bancos y fintechs se animan a entrar.</p></div></article>
+        <article class="reason"><button class="r-head"><em>03</em><span>Los grandes se subieron</span><i class="chev"></i></button><div class="r-body"><p><b>Stripe, Visa, Mastercard y PayPal</b> ya mueven o emiten stablecoins. Acá, <b>Ripio</b> emite monedas locales digitales: wARS, wBRL, wMXN…</p></div></article>
+        <article class="reason"><button class="r-head"><em>04</em><span>Los agentes de IA necesitan una billetera</span><i class="chev"></i></button><div class="r-body"><p>Un agente no puede abrir una cuenta en un banco, pero sí tener una wallet: <b>cobrar, pagar y liquidar solo</b>, a cualquier hora y por centavos. <b>x402</b> (pagos por HTTP) y <b>ERC-8004</b> (identidad de agentes) lo hacen posible.</p></div></article>
       </div>
       <aside class="card latam" data-in>
-        <p class="label">Y en LatAm</p>
+        <p class="lbl">Y en LatAm</p>
         <p class="serif">No es el futuro: <span>sirve hoy.</span></p>
-        <p class="txt">Inflación, cepo, remesas caras y millones de personas fuera del sistema bancario. Una stablecoin en tu moneda, en el celular, resuelve problemas reales.</p>
+        <p>Inflación, cepo, remesas caras y millones de personas fuera del sistema bancario. Una stablecoin en tu moneda, en el celular, resuelve problemas reales.</p>
       </aside>
     </div>
   </section>
 
-  <!-- ========== 08 · Celo ========== -->
+  <!-- 08 · Celo -->
   <section class="slide s-celo" data-section="2" data-title="¿Y Celo?">
-    <p class="kicker" data-in><b>/ 02 Celo</b><span class="dot">·</span>La red</p>
-    <h1 data-in>¿Y Celo?</h1>
-    <img class="logo-top" src="assets/logo-celo.png" alt="Celo" data-in>
+    <div class="head-row">
+      <div>
+        <p class="kicker" data-in><b>/ 02 CELO</b><span>·</span>La red</p>
+        <h1 data-in>¿Y Celo?</h1>
+      </div>
+      <img class="logo-top" src="assets/logo-celo.png" alt="Celo" data-in>
+    </div>
     <div class="facts">
       <div class="fact" data-in><span class="serif">L2</span><p><b>Capa 2 de Ethereum (desde el 26/03/2025, con OP Stack):</b> procesa los pagos rápido y barato, y se apoya en Ethereum para la seguridad.</p></div>
-      <div class="fact" data-in><span class="serif">~1 s <i class="tick" title="1 bloque ≈ 1 segundo"></i></span><p><b>Bloques de ~1 segundo:</b> un bloque nuevo cada segundo, aprox.</p></div>
+      <div class="fact" data-in><span class="serif">~1 s <i class="tick"></i></span><p><b>Bloques de ~1 segundo:</b> un bloque nuevo cada segundo, aprox.</p></div>
       <div class="fact" data-in><span class="serif">Gas</span><p><b>Gas promedio $0.0005:</b> se puede pagar en USD₮, USDC o USDm.</p></div>
-      <div class="fact" data-in><span class="serif">wFIAT</span><p><b>Monedas locales de Ripio:</b> wARS, wBRL, wMXN… La «w» es de «wrapped»: 1:1 con la moneda real. No son moneda de curso legal.</p></div>
+      <div class="fact" data-in><span class="serif">wFIAT</span><p><b>Monedas locales de Ripio:</b> wARS, wBRL, wMXN... La «w» es de «wrapped»: 1:1 con la moneda real. No son moneda de curso legal.</p></div>
     </div>
     <div class="stats-row" data-in>
       <div><b>20M+</b><span>Wallets de MiniPay</span></div>
@@ -275,74 +195,71 @@
     </div>
   </section>
 
-  <!-- ========== 07 · Números ========== -->
+  <!-- 09 · Números -->
   <section class="slide s-nums" data-section="2" data-title="Celo en números">
-    <p class="kicker" data-in><b>/ 02 Celo</b><span class="dot">·</span>En números</p>
-    <h1 data-in>Celo: la blockchain hecha para<br>finanzas reales</h1>
+    <p class="kicker" data-in><b>/ 02 CELO</b><span>·</span>En números</p>
+    <h1 data-in>Celo: la blockchain hecha para finanzas reales</h1>
     <div class="cols">
-      <div class="grid nums">
-        <div class="num" data-in><p class="serif"><span data-count="20" data-suffix="M+">20M+</span></p><p class="label">Wallets MiniPay</p></div>
-        <div class="num" data-in><p class="serif">USD <span data-count="6200" data-suffix="M">6.200M</span></p><p class="label">De volumen mensual en stablecoins</p></div>
-        <div class="num" data-in><p class="serif"><span data-count="450" data-suffix="K+">450K+</span></p><p class="label">Usuarios activos por día</p></div>
-        <div class="num" data-in><p class="serif"><span data-count="32">32</span></p><p class="label">Stablecoins globales</p></div>
+      <div class="nums">
+        <div class="num" data-in><p class="serif"><span data-count="20" data-suffix="M+">20M+</span></p><p class="lbl">Wallets MiniPay</p></div>
+        <div class="num" data-in><p class="serif">USD <span data-count="6200" data-suffix="M">6.200M</span></p><p class="lbl">De volumen mensual en stablecoins</p></div>
+        <div class="num" data-in><p class="serif"><span data-count="450" data-suffix="K+">450K+</span></p><p class="lbl">Usuarios activos por día</p></div>
+        <div class="num" data-in><p class="serif"><span data-count="32">32</span></p><p class="lbl">Stablecoins globales</p></div>
       </div>
-      <div class="card calc" data-in>
-        <h4>Calculadora de gas</h4>
+      <aside class="card calc" data-in>
+        <p class="lbl">Calculadora de gas</p>
         <p class="q">Si tu agente hace…</p>
-        <p class="tx"><output id="calc-n">1.000</output><small>tx / mes</small></p>
-        <input class="range" id="calc" type="range" min="0" max="100" value="50" aria-label="Transacciones por mes">
-        <div class="res"><span class="label">Gas estimado</span><b>US$ <output id="calc-r">0,50</output></b></div>
-        <p class="fine">Con el gas promedio de $0.0005 por transacción. Es un promedio: el costo real varía.</p>
-      </div>
+        <p class="tx serif"><output id="calc-n">1.000</output><small>tx / mes</small></p>
+        <input class="range" id="calc" type="range" min="0" max="100" value="40" aria-label="Transacciones por mes">
+        <div class="res"><span class="lbl">Gas estimado</span><b class="serif">US$ <output id="calc-r">0,50</output></b></div>
+        <p class="fine">Con el gas promedio de $0.0005 por transacción. El costo real varía.</p>
+      </aside>
     </div>
     <p class="foot" data-in>L2 de Ethereum · bloques de 1 s · gas promedio $0.0005, pagable en USD₮, USDC o USDm</p>
   </section>
 
-  <!-- ========== 08 · Hackathon ========== -->
+  <!-- 10 · Hackathon -->
   <section class="slide s-hack" data-section="3" data-title="Agentes que cobran, pagan y liquidan">
     <div class="cols">
       <div>
-        <p class="kicker" data-in><b>/ 03 Hackathon</b><span class="dot">·</span>Agents on Open Rails</p>
+        <p class="kicker" data-in><b>/ 03 HACKATHON</b><span>·</span>Agents on Open Rails</p>
         <h1 data-in>Agentes que cobran, pagan y liquidan con plata real</h1>
-        <dl data-in>
+        <dl class="meta" data-in>
           <div><dt>ENTREGA:</dt><dd>del 6/10 al lunes 9/11, 06:00 (hora ARG)</dd></div>
           <div><dt>DÓNDE:</dt><dd>online, en Loops House · Celo mainnet</dd></div>
           <div><dt>GANADORES:</dt><dd>viernes 13/11</dd></div>
         </dl>
-        <p class="any" data-in><span class="accent">/</span>&nbsp; <b>Cualquier framework de agentes;</b> podés anotarte en más de un track</p>
+        <p class="any" data-in><span class="slash">/</span><b>Cualquier framework de agentes;</b> podés anotarte en más de un track</p>
         <div class="prize" data-in>
-          <div><p class="label">En premios</p><p class="serif">USD 5.000</p></div>
+          <div><p class="lbl">En premios</p><p class="serif">USD 5.000</p></div>
           <p>en $CELO, repartidos en 4 tracks</p>
         </div>
       </div>
-      <div data-in>
+      <div class="side" data-in>
         <div class="cover-img"><img src="assets/hackathon.jpg" alt="Agents on Open Rails Hackathon"></div>
-        <div class="tracks-bar"><i style="--f:1;--c:var(--green)"></i><i style="--f:1;--c:var(--purple)"></i><i style="--f:1;--c:var(--lavender)"></i><i style="--f:1;--c:var(--orange)"></i></div>
-        <div class="cd-label"><span class="label">Cierre en</span><span class="label dim">lun 9/11 · 06:00 ART</span></div>
+        <div class="tracks-bar"><i style="--c:var(--green)"></i><i style="--c:var(--purple)"></i><i style="--c:var(--lavender)"></i><i style="--c:var(--orange)"></i></div>
+        <div class="cd-row"><span class="lbl">Cierre en</span><span class="lbl dim">lun 9/11 · 06:00 ART</span></div>
         <div class="countdown" data-countdown></div>
       </div>
     </div>
   </section>
 
-  <!-- ========== 09 · wFIAT ========== -->
+  <!-- 11 · wFIAT -->
   <section class="slide s-fiat" data-section="4" data-title="Stablecoins locales">
     <div class="cols">
       <div>
-        <p class="kicker" data-in><b>/ 04 Tracks</b><span class="dot">·</span>Track 1: Stable Agents: LatAm</p>
+        <p class="kicker" data-in><b>/ 04 TRACKS</b><span>·</span>Track 1: Stable Agents: LatAm</p>
         <h1 data-in>Las stablecoins locales son la última milla para los agentes onchain</h1>
         <p class="note" data-in>En LatAm mover plata casi siempre implica pasar por el dólar, con comisiones en cada paso.</p>
         <div class="card route" id="route" data-in>
-          <div class="tabs">
-            <button class="pill on" data-mode="hoy">Hoy</button>
-            <button class="pill" data-mode="onchain">Con wFIAT</button>
-          </div>
+          <div class="tabs"><button class="pill on" data-mode="hoy">Hoy</button><button class="pill" data-mode="onchain">Con wFIAT</button></div>
           <div class="path"></div>
           <p class="cap"></p>
         </div>
-        <p class="where" data-in>/&nbsp; En Celo mainnet · misma dirección en otras EVM</p>
+        <p class="where" data-in><span class="slash">/</span>En Celo mainnet · misma dirección en otras EVM</p>
       </div>
       <div>
-        <div class="grid fiats" data-in>
+        <div class="fiats" data-in>
           <div class="card fiat tap"><b>wARS</b><span>Argentina · peso</span></div>
           <div class="card fiat tap"><b>wBRL</b><span>Brasil · real</span></div>
           <div class="card fiat tap"><b>wMXN</b><span>México · peso</span></div>
@@ -350,145 +267,107 @@
           <div class="card fiat tap"><b>wCLP</b><span>Chile · peso</span></div>
           <div class="card fiat tap"><b>wPEN</b><span>Perú · sol</span></div>
         </div>
-        <p class="label under" data-in>wFIAT de Ripio · 1:1 con la moneda real</p>
+        <p class="lbl under" data-in>wFIAT de Ripio</p>
       </div>
     </div>
   </section>
 
-  <!-- ========== 10 · Tracks ========== -->
+  <!-- 12 · Tracks -->
   <section class="slide s-tracks" data-section="4" data-title="4 tracks, US$5.000 en $CELO">
-    <p class="kicker" data-in><b>/ 04 Tracks</b><span class="dot">·</span>4 formas de ganar</p>
+    <p class="kicker" data-in><b>/ 04 TRACKS</b><span>·</span>4 formas de ganar</p>
     <h1 data-in>4 tracks, US$5.000 en $CELO</h1>
     <div class="split" data-in>
-      <button style="--f:2000;--c:var(--green)" data-t="0">T1 · $2.000</button>
-      <button style="--f:1000;--c:var(--purple)" data-t="1">T2A · $1.000</button>
-      <button style="--f:1000;--c:var(--lavender)" data-t="2">T2B · $1.000</button>
-      <button style="--f:1000;--c:var(--orange)" data-t="3">T3 · $1.000</button>
+      <button style="--f:2;--c:var(--green)" data-t="0">T1 · $2.000</button>
+      <button style="--f:1;--c:var(--purple)" data-t="1">T2A · $1.000</button>
+      <button style="--f:1;--c:var(--lavender)" data-t="2">T2B · $1.000</button>
+      <button style="--f:1;--c:var(--orange)" data-t="3">T3 · $1.000</button>
     </div>
-    <div class="grid tracks" id="tracks">
+    <div class="row tracks" id="tracks">
       <article class="card track tap" style="--c:var(--green)" data-in data-go=".s-latam">
         <div class="img"><img src="assets/track-1.jpg" alt="Track 1"></div>
-        <div class="body">
-          <p class="label">Track 1 · Ripio × Celo</p>
-          <h3>Stable Agents: LatAm</h3>
-          <p>Cobran, pagan, ahorran y liquidan en las stablecoins locales de Ripio</p>
-          <p class="amt">$1.500 · $500</p>
-        </div>
+        <div class="body"><p class="lbl">Track 1 · Ripio × Celo</p><h3>Stable Agents: LatAm</h3><p>Cobran, pagan, ahorran y liquidan en las stablecoins locales de Ripio</p><p class="amt">$1.500 · $500</p></div>
       </article>
       <article class="card track tap" style="--c:var(--purple)" data-in>
         <div class="img"><img src="assets/track-2a.jpg" alt="Track 2A"></div>
-        <div class="body">
-          <p class="label">Track 2A · Textile</p>
-          <h3>Open Corridors: FX</h3>
-          <p>Cotizan y liquidan FX en Textile, un mercado de cambio onchain</p>
-          <p class="amt">$750 · $250</p>
-        </div>
+        <div class="body"><p class="lbl">Track 2A · Textile</p><h3>Open Corridors: FX</h3><p>Cotizan y liquidan FX en Textile, un mercado de cambio onchain</p><p class="amt">$750 · $250</p></div>
       </article>
       <article class="card track tap" style="--c:var(--lavender)" data-in>
         <div class="img"><img src="assets/track-2b.jpg" alt="Track 2B"></div>
-        <div class="body">
-          <p class="label">Track 2B · Celo x402</p>
-          <h3>Open Corridors: USA₮ con x402</h3>
-          <p>Usuarios reales que liquidan USA₮ con el facilitador x402 de Celo</p>
-          <p class="amt">$750 · $250</p>
-        </div>
+        <div class="body"><p class="lbl">Track 2B · Celo x402</p><h3>Open Corridors: USA₮ con x402</h3><p>Usuarios reales que liquidan USA₮ con el facilitador x402 de Celo</p><p class="amt">$750 · $250</p></div>
       </article>
       <article class="card track tap" style="--c:var(--orange)" data-in>
         <div class="img"><img src="assets/track-3.jpg" alt="Track 3"></div>
-        <div class="body">
-          <p class="label">Track 3 · buy</p>
-          <h3>Build with buy</h3>
-          <p>Productos que pagan por servicios que no son suyos: cómputo, browsers, datos, inferencia</p>
-          <p class="amt">$1.000<small>Entre 5 proyectos</small></p>
-        </div>
+        <div class="body"><p class="lbl">Track 3 · buy</p><h3>Build with buy</h3><p>Productos que pagan por servicios que no son suyos: cómputo, browsers, datos, inferencia</p><p class="amt">$1.000<small>Entre 5 proyectos</small></p></div>
       </article>
     </div>
   </section>
 
-  <!-- ========== 11 · Track LatAm ========== -->
+  <!-- 13 · Track LatAm -->
   <section class="slide s-latam" data-section="4" data-title="Track LatAm">
     <div class="cols">
       <div>
-        <p class="kicker" data-in><b>/ 04 Tracks</b><span class="dot">·</span>Track 1 · Ripio × Celo</p>
+        <p class="kicker" data-in><b>/ 04 TRACKS</b><span>·</span>Track 1 · Ripio × Celo</p>
         <h1 data-in>Track LatAm</h1>
         <div class="places" data-in>
-          <div><p class="label">1er puesto</p><p class="serif">USD 1.500</p></div>
-          <div><p class="label">2do puesto</p><p class="serif">USD 500</p></div>
+          <div><p class="lbl">1er puesto</p><p class="serif">USD 1.500</p></div>
+          <div><p class="lbl">2do puesto</p><p class="serif">USD 500</p></div>
         </div>
         <div class="steps" data-check="latam" data-in>
-          <div class="step"><em>01</em><span>Corre en Celo mainnet y mueve wFIAT real de Ripio</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
-          <div class="step"><em>02</em><span>Tag de atribución en cada transacción: «una transacción sin tu tag nunca se puede contar después»</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
-          <div class="step"><em>03</em><span>El tag te lo da la skill de Loops House al registrarte</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
-          <div class="step"><em>04</em><span>Usuarios reales en LatAm y un camino claro para crecer después del hackathon</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+          <div class="step"><em>01</em><span>Corre en Celo mainnet y mueve wFIAT real de Ripio</span><i class="box"></i></div>
+          <div class="step"><em>02</em><span>Tag de atribución en cada transacción: «una transacción sin tu tag nunca se puede contar después»</span><i class="box"></i></div>
+          <div class="step"><em>03</em><span>El tag te lo da la skill de Loops House al registrarte</span><i class="box"></i></div>
+          <div class="step"><em>04</em><span>Usuarios reales en LatAm y un camino claro para crecer después del hackathon</span><i class="box"></i></div>
         </div>
       </div>
-      <div data-in>
-        <div class="cover-img"><img src="assets/track-1-ripio.jpg" alt="Track 1 · Stable Agents: LatAm with Ripio"></div>
-        <div class="logos">
-          <img src="assets/logo-celo.png" alt="Celo" height="34">
-          <span class="sep"></span>
-          <img src="assets/logo-ripio.png" alt="Ripio" height="38">
-        </div>
+      <div class="side" data-in>
+        <div class="cover-img green"><img src="assets/track-1-ripio.jpg" alt="Track 1 · Stable Agents: LatAm with Ripio"></div>
+        <div class="logos"><img src="assets/logo-celo.png" alt="Celo" class="l-celo"><span class="sep"></span><img src="assets/logo-ripio.png" alt="Ripio" class="l-ripio"></div>
       </div>
     </div>
   </section>
 
-  <!-- ========== 12 · Evaluación ========== -->
+  <!-- 14 · Evaluación -->
   <section class="slide s-eval" data-section="4" data-title="Cómo te evalúan">
-    <p class="kicker" data-in><b>/ 04 Tracks</b><span class="dot">·</span>Track 1 · Cómo se evalúa</p>
+    <p class="kicker" data-in><b>/ 04 TRACKS</b><span>·</span>Track 1 · Cómo se evalúa</p>
     <h1 data-in>Cómo te evalúan</h1>
     <div class="cols">
-      <div id="crits" data-in>
-        <div class="crit"><em>01</em><p><strong>Funciona en mainnet con wFIAT real</strong> <span>(verificado por tu tag)</span></p><div class="rate"></div></div>
-        <div class="crit"><em>02</em><p><strong>Uso real de wFIAT y del stack Celo:</strong> <span>ERC-8004, x402, gas en stablecoins, MiniPay</span></p><div class="rate"></div></div>
-        <div class="crit"><em>03</em><p><strong>Autonomía:</strong> <span>el agente actúa solo y le ahorra tiempo o plata a alguien concreto</span></p><div class="rate"></div></div>
-        <div class="crit"><em>04</em><p><strong>UX</strong> <span>que alguien nuevo en cripto pueda usar, con montos en su moneda</span></p><div class="rate"></div></div>
-        <div class="crit"><em>05</em><p><strong>Impacto en LatAm:</strong> <span>una necesidad real y para quién es</span></p><div class="rate"></div></div>
+      <div class="crits" id="crits" data-in>
+        <div class="crit"><em>01</em><p><b>Funciona en mainnet con wFIAT real</b> (verificado por tu tag)</p><div class="rate"></div></div>
+        <div class="crit"><em>02</em><p><b>Uso real de wFIAT y del stack Celo:</b> ERC-8004, x402, gas en stablecoins, MiniPay</p><div class="rate"></div></div>
+        <div class="crit"><em>03</em><p><b>Autonomía:</b> el agente actúa solo y le ahorra tiempo o plata a alguien concreto</p><div class="rate"></div></div>
+        <div class="crit"><em>04</em><p><b>UX</b> que alguien nuevo en cripto pueda usar, con montos en su moneda</p><div class="rate"></div></div>
+        <div class="crit"><em>05</em><p><b>Impacto en LatAm:</b> una necesidad real y para quién es</p><div class="rate"></div></div>
       </div>
-      <div class="card score" data-in>
+      <aside class="card score" data-in>
         <p class="serif">20% c/u</p>
-        <p class="label">5 criterios, mismo peso</p>
+        <p class="lbl">5 criterios, mismo peso</p>
         <div class="meter"><i id="meter"></i></div>
-        <div class="you"><span class="label">Autoevaluación</span><b><output id="score">0</output>%</b></div>
+        <div class="you"><span class="lbl">Autoevaluación</span><b><output id="score">0</output>%</b></div>
         <p class="msg" id="score-msg">Puntuá tu proyecto de 1 a 5 en cada criterio.</p>
-        <button class="pill reset" id="score-reset">Reiniciar</button>
-      </div>
+        <button class="pill" id="score-reset">Reiniciar</button>
+      </aside>
     </div>
   </section>
 
-  <!-- ========== 13 · Reglas ========== -->
+  <!-- 15 · Reglas -->
   <section class="slide s-rules" data-section="3" data-title="Requisitos que te pueden dejar afuera">
-    <p class="kicker" data-in><b>/ 03 Hackathon</b><span class="dot">·</span>Reglas</p>
+    <p class="kicker" data-in><b>/ 03 HACKATHON</b><span>·</span>Reglas</p>
     <h1 data-in>Requisitos que te pueden dejar afuera</h1>
-    <div class="grid rules" data-check="rules">
-      <article class="card rule" style="--c:var(--yellow)" data-in>
-        <div class="top"><p class="label">Mainnet</p><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
-        <p><b>Solo cuenta lo que pasa en Celo mainnet.</b> Tener testnet en el repo está bien.</p>
-      </article>
-      <article class="card rule" style="--c:var(--green)" data-in>
-        <div class="top"><p class="label">Tag · ERC-8021</p><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
-        <p><b>Attribution tag ERC-8021 en el calldata de cada transacción,</b> en el cliente de la wallet (no en el contrato). Lo que mandes sin tag no se puede acreditar después.</p>
-      </article>
-      <article class="card rule" style="--c:var(--green)" data-in>
-        <div class="top"><p class="label">ERC-8004</p><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
-        <p><b>Obligatorio en todos los tracks:</b> tu agente registra su identidad desde su propia wallet antes del cierre.</p>
-      </article>
-      <article class="card rule" style="--c:var(--yellow)" data-in>
-        <div class="top"><p class="label">Repo</p><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
-        <p><b>Público en GitHub desde la inscripción</b> y accesible hasta el juzgamiento. Código escrito durante la hackathon.</p>
-      </article>
+    <div class="row rules" data-check="rules">
+      <article class="card rule" style="--c:var(--yellow)" data-in><div class="top"><p class="lbl">Mainnet</p><i class="box"></i></div><p><b>Solo cuenta lo que pasa en Celo mainnet.</b> Tener testnet en el repo está bien.</p></article>
+      <article class="card rule" style="--c:var(--green)" data-in><div class="top"><p class="lbl">Tag · ERC-8021</p><i class="box"></i></div><p><b>Attribution tag ERC-8021 en el calldata de cada transacción,</b> en el cliente de la wallet (no en el contrato). Lo que mandes sin tag no se puede acreditar después.</p></article>
+      <article class="card rule" style="--c:var(--green)" data-in><div class="top"><p class="lbl">ERC-8004</p><i class="box"></i></div><p><b>Obligatorio en todos los tracks:</b> tu agente registra su identidad desde su propia wallet antes del cierre.</p></article>
+      <article class="card rule" style="--c:var(--yellow)" data-in><div class="top"><p class="lbl">Repo</p><i class="box"></i></div><p><b>Público en GitHub desde la inscripción</b> y accesible hasta el juzgamiento. Código escrito durante la hackathon.</p></article>
     </div>
-    <div class="bottom" data-in>
-      <p><b>Un premio por track por equipo.</b> Si tu relayer paga el gas, contalo en la entrega: no cuenta como aporte del builder.</p>
-    </div>
-    <p class="dates" data-in>CIERRE: <b>lunes 9/11, 06:00 ART</b><i>·</i>GANADORES: <b>viernes 13/11</b><i>·</i><span class="ready" id="rules-ready"><b>0</b>/4 listos</span></p>
+    <p class="foot" data-in><b>Un premio por track por equipo.</b> Si tu relayer paga el gas, contalo en la entrega: no cuenta como aporte del builder.</p>
+    <p class="dates" data-in><span>CIERRE:</span> <b>lunes 9/11, 06:00 ART</b><i>·</i><span>GANADORES:</span> <b>viernes 13/11</b><i>·</i><span class="ready" id="rules-ready"><b>0</b>/4 listos</span></p>
   </section>
 
-  <!-- ========== 14 · Ideas ========== -->
+  <!-- 16 · Ideas -->
   <section class="slide s-ideas" data-section="5" data-title="¿Qué agente podrías construir?">
-    <p class="kicker" data-in><b>/ 05 Construir</b><span class="dot">·</span>Ideas</p>
+    <p class="kicker" data-in><b>/ 05 CONSTRUIR</b><span>·</span>Ideas</p>
     <h1 data-in>¿Qué agente podrías construir?</h1>
-    <div class="grid ideas" id="ideas" data-pick>
+    <div class="row ideas" id="ideas" data-pick>
       <article class="card idea tap" data-in><h4><em>01</em>Cobrador</h4><p>emite cobros en wARS, avisa por WhatsApp y concilia cuando entra el pago</p></article>
       <article class="card idea tap" data-in><h4><em>02</em>Remesas sin dólar</h4><p>manda wARS a Brasil y llega como wBRL, sin pasar por USD</p></article>
       <article class="card idea tap" data-in><h4><em>03</em>Ahorro automático</h4><p>separa un porcentaje de cada cobro apenas entra</p></article>
@@ -502,113 +381,82 @@
     </div>
   </section>
 
-  <!-- ========== 15 · Stack ========== -->
+  <!-- 17 · Stack -->
   <section class="slide s-stack" data-section="5" data-title="Tu stack para arrancar">
-    <p class="kicker" data-in><b>/ 05 Construir</b><span class="dot">·</span>Stack</p>
+    <p class="kicker" data-in><b>/ 05 CONSTRUIR</b><span>·</span>Stack</p>
     <h1 data-in>Tu stack para arrancar</h1>
-    <div class="grid stack">
-      <article class="card tool" data-in>
-        <h3>Celopedia</h3>
-        <p class="src">skill oficial de Celo</p>
-        <p>Tu coding agent ya sabe construir en Celo.</p>
-      </article>
-      <a class="card tool tap" href="https://eve.dev" target="_blank" rel="noopener" data-in>
-        <h3>eve de Vercel</h3>
-        <p class="src">eve.dev · Node 24+</p>
-        <p>Agentes como carpetas; se deploya en Vercel.</p>
-        <span class="go">Abrir ↗</span>
-      </a>
-      <a class="card tool tap" href="https://ramp.ripio.com" target="_blank" rel="noopener" data-in>
-        <h3>Ripio Ramp</h3>
-        <p class="src">ramp.ripio.com</p>
-        <p>On/off-ramp en moneda local por URL, sin credenciales.</p>
-        <span class="go">Abrir ↗</span>
-      </a>
-      <a class="card tool tap" href="https://bridge.ripio.com" target="_blank" rel="noopener" data-in>
-        <h3>Ripio Bridge</h3>
-        <p class="src">bridge.ripio.com</p>
-        <p>Mové wFIAT entre cadenas: usalo como dapp o integralo con /developers.</p>
-        <span class="go">Abrir ↗</span>
-      </a>
+    <div class="row stack">
+      <article class="card tool" data-in><h3>Celopedia</h3><p class="src">skill oficial de Celo</p><p>Tu coding agent ya sabe construir en Celo.</p></article>
+      <a class="card tool tap" href="https://eve.dev" target="_blank" rel="noopener" data-in><h3>eve de Vercel</h3><p class="src">eve.dev · Node 24+</p><p>Agentes como carpetas; se deploya en Vercel.</p><span class="go">Abrir ↗</span></a>
+      <a class="card tool tap" href="https://ramp.ripio.com" target="_blank" rel="noopener" data-in><h3>Ripio Ramp</h3><p class="src">ramp.ripio.com</p><p>On/off-ramp en moneda local por URL, sin credenciales.</p><span class="go">Abrir ↗</span></a>
+      <a class="card tool tap" href="https://bridge.ripio.com" target="_blank" rel="noopener" data-in><h3>Ripio Bridge</h3><p class="src">bridge.ripio.com</p><p>Mové wFIAT entre cadenas: usalo como dapp o integralo con /developers.</p><span class="go">Abrir ↗</span></a>
     </div>
-    <p class="label mt" data-in>Para arrancar · clic para copiar</p>
-    <div class="grid cmds" data-in>
+    <p class="lbl mt" data-in>Para arrancar · clic para copiar</p>
+    <div class="row cmds" data-in>
       <button class="cmd" data-copy="npx skills add celo-org/celopedia-skills"><span class="p">$</span><code>npx skills add celo-org/celopedia-skills</code><small>Celopedia</small></button>
       <button class="cmd" data-copy="npx eve@latest init mi-agente"><span class="p">$</span><code>npx eve@latest init mi-agente</code><small>eve · Node 24+</small></button>
     </div>
-    <ul class="bullets" data-in>
-      <li><span><b>Verificá siempre</b> las direcciones oficiales de los tokens</span></li>
-      <li><span><b>Contexto para tu coding agent:</b> eve.dev/llms.txt y docs.ripio.com/llms.txt</span></li>
-      <li><span><b>Office hours:</b> jueves 9:00 (hora ARG)</span></li>
+    <ul class="bullets small" data-in>
+      <li><b>Verificá siempre</b>&nbsp;las direcciones oficiales de los tokens</li>
+      <li><b>Contexto para tu coding agent:</b>&nbsp;eve.dev/llms.txt y docs.ripio.com/llms.txt</li>
+      <li><b>Office hours:</b>&nbsp;jueves 9:00 (hora ARG)</li>
     </ul>
   </section>
 
-  <!-- ========== 16 · Sedes ========== -->
+  <!-- 18 · Sedes -->
   <section class="slide s-sedes" data-section="6" data-title="Builder Sessions · sábado 17/10">
     <div class="cols">
       <div>
-        <p class="kicker" data-in><b>/ 06 Cierre</b><span class="dot">·</span>Builder Sessions</p>
-        <h1 data-in>Builder Sessions · sábado<br>17/10, 18:00</h1>
+        <p class="kicker" data-in><b>/ 06 CIERRE</b><span>·</span>Builder Sessions</p>
+        <h1 data-in>Builder Sessions · sábado 17/10, 18:00</h1>
         <div class="card venue hot" data-in>
-          <p class="label" id="venue-label">Tu sede</p>
+          <p class="lbl" id="venue-label">Tu sede</p>
           <div><h3 id="venue-city">Jujuy</h3><p id="venue-host">Franco Durán (jujuy.dev)</p></div>
         </div>
         <div class="card venue" data-in>
-          <p class="label">Dudas</p>
+          <p class="lbl">Dudas</p>
           <div><h3>Telegram del hackathon</h3><p><a href="https://t.me/realworldagentshackathon" target="_blank" rel="noopener">t.me/realworldagentshackathon</a> — el equipo DevRel de Celo responde ahí</p></div>
         </div>
         <div class="cities" id="cities" data-in></div>
-        <p class="foot" data-in><b>Seis ciudades en simultáneo.</b> Tocá una ciudad en el mapa para ver quién la organiza.</p>
+        <p class="foot" data-in><b>Seis ciudades en simultáneo.</b> Tocá una ciudad para ver quién la organiza.</p>
       </div>
-      <div class="map" id="sedes-map" data-in>
-        <img src="assets/mapa.webp" alt="Mapa de Argentina con las seis sedes">
-      </div>
+      <div class="map sedes-map" id="sedes-map" data-in><img src="assets/mapa.webp" alt="Mapa de Argentina con las seis sedes"></div>
     </div>
   </section>
 
-  <!-- ========== 17 · Cierre ========== -->
+  <!-- 19 · Cierre -->
   <section class="slide s-end" data-section="6" data-title="No procrastinen: son 5 semanas">
-    <div class="rails" data-in><img src="assets/rails-tall.jpg" alt=""></div>
-    <p class="kicker" data-in style="--accent:var(--yellow)"><b>/ 06 Cierre</b><span class="dot">·</span>Manos a la obra</p>
-    <h1 data-in>No procrastinen:<br><span>son 5 semanas</span></h1>
-    <div class="todo" data-check="todo" data-in>
-      <div class="step"><em>01</em><span>Registrate en Loops House</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
-      <div class="step"><em>02</em><span>Instalá la skill del hackathon y obtené tu tag</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
-      <div class="step"><em>03</em><span>Sumate al Telegram</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
-      <div class="step"><em>04</em><span>Hacé tu primera transacción real con tu tag</span><i class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></i></div>
+    <div class="rails" aria-hidden="true"><img src="assets/rails-tall.jpg" alt=""></div>
+    <p class="kicker" data-in><b>/ 06 CIERRE</b><span>·</span>Manos a la obra</p>
+    <h1 class="xl" data-in>No procrastinen:<br><span>son 5 semanas</span></h1>
+    <div class="steps todo" data-check="todo" data-in>
+      <div class="step"><em>01</em><span>Registrate en Loops House</span><i class="box"></i></div>
+      <div class="step"><em>02</em><span>Instalá la skill del hackathon y obtené tu tag</span><i class="box"></i></div>
+      <div class="step"><em>03</em><span>Sumate al Telegram</span><i class="box"></i></div>
+      <div class="step"><em>04</em><span>Hacé tu primera transacción real con tu tag</span><i class="box"></i></div>
     </div>
     <div class="tail" data-in>
-      <dl>
-        <div><dt>/ Cierre:</dt> <dd>lunes 9/11, 06:00 (hora ARG)</dd></div>
-        <div><dt>/ Ganadores:</dt> <dd>viernes 13/11</dd></div>
-      </dl>
+      <p class="dates"><span class="slash">/</span><span>CIERRE:</span> LUNES 9/11, 06:00 (HORA ARG)<br><span class="slash">/</span><span>GANADORES:</span> VIERNES 13/11</p>
       <div class="countdown" data-countdown></div>
     </div>
   </section>
 
-  <!-- ========== UI ========== -->
-  <div class="hint" id="hint"><kbd>←</kbd><kbd>→</kbd> navegar &nbsp; <kbd>O</kbd> índice &nbsp; <kbd>F</kbd> pantalla completa</div>
-
+  <!-- UI -->
   <div class="dock">
     <button id="prev" aria-label="Anterior"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></button>
     <button id="next" aria-label="Siguiente"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></button>
     <button id="grid" aria-label="Índice (O)"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="5" height="5"/><rect x="9" y="2" width="5" height="5"/><rect x="2" y="9" width="5" height="5"/><rect x="9" y="9" width="5" height="5"/></svg></button>
     <button id="full" aria-label="Pantalla completa (F)"><svg viewBox="0 0 16 16"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg></button>
   </div>
+  <p class="hint" id="hint"><kbd>←</kbd><kbd>→</kbd> navegar · <kbd>O</kbd> índice · <kbd>F</kbd> pantalla completa</p>
 
   <div class="overview" id="overview" aria-hidden="true">
-    <header><h2>Índice</h2><span class="label">Esc para cerrar</span></header>
+    <header><h2>Índice</h2><span class="lbl">Esc para cerrar</span></header>
     <div class="thumbs" id="thumbs"></div>
   </div>
-
   <div class="toast" id="toast"></div>
 </main>
 </div>
-<div class="rotate" id="rotate" role="status">
-  <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M3 9a9 9 0 0 1 4-5M21 15a9 9 0 0 1-4 5"/></svg>
-  <span>Girá el celular para ver las slides en grande. Deslizá para avanzar.</span>
-  <button aria-label="Cerrar">✕</button>
-</div>
-<script src="deck.js?v=3"></script>
+<script src="deck.js?v=4"></script>
 </body>
 </html>

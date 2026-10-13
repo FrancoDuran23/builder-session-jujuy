@@ -26,7 +26,7 @@ GitHub Pages lo sirve desde `main` / `/ (root)`; `.nojekyll` evita que Jekyll pr
 | `O` | Índice de todas las slides |
 | `F` | Pantalla completa |
 
-En el celu/tablet: deslizar a los costados. Cada slide tiene su URL (`#/7`). La barra de progreso de arriba es clicable por sección. `Ctrl+P` exporta a PDF, una slide por página.
+En el celu: deslizar a los costados; en vertical las slides se muestran en una columna con scroll. Cada slide tiene su URL (`#/7`). La barra de progreso de arriba es clicable por sección. `Ctrl+P` exporta a PDF, una slide por página.
 
 ## Qué es interactivo
 
@@ -48,7 +48,7 @@ En el celu/tablet: deslizar a los costados. Cada slide tiene su URL (`#/7`). La 
 
 ```
 index.html   slides
-deck.css     estilos (lienzo 1600×900 escalado al viewport)
+deck.css     estilos (lienzo 960×540, las medidas del PDF, escalado al viewport; en celular vertical fluye en una columna)
 deck.js      navegación + interacciones
 landing.html landing anterior de la sede (fuentes en fonts/)
 assets/      mapa, logos y artes de los tracks (extraídos del PDF v9)
