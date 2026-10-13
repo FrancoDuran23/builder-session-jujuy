@@ -448,6 +448,16 @@
     setTimeout(() => { b.classList.remove("copied"); s.textContent = old; }, 1600);
   }));
 
+  /* prompt para arrancar */
+  $("#copy-prompt")?.addEventListener("click", async (e) => {
+    e.stopPropagation();
+    const txt = $("#starter-prompt").textContent;
+    try { await navigator.clipboard.writeText(txt); }
+    catch { const t = document.createElement("textarea"); t.value = txt; document.body.appendChild(t); t.select(); try { document.execCommand("copy"); } catch {} t.remove(); }
+    const b = e.currentTarget, old = b.textContent; b.textContent = "✓ Copiado"; toast("Prompt copiado");
+    setTimeout(() => (b.textContent = old), 1600);
+  });
+
   /* 18 · sedes */
   (() => {
     const CITIES = [

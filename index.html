@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23000'/><rect x='4' y='4' width='8' height='8' fill='%2335d07f'/></svg>">
 <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="deck.css?v=11">
+<link rel="stylesheet" href="deck.css?v=12">
 </head>
 <body>
 <div class="viewport" id="viewport">
@@ -18,7 +18,7 @@
   <header class="chrome">
     <div class="brand"><i></i>Agents on Open Rails · Builder Session Jujuy</div>
     <nav class="progress" id="progress" aria-label="Secciones"></nav>
-    <div class="counter" id="counter"><b>01</b> / 20</div>
+    <div class="counter" id="counter"><b>01</b> / 21</div>
   </header>
 
   <!-- 01 · Portada -->
@@ -439,7 +439,52 @@
     </ul>
   </section>
 
-  <!-- 18 · Sedes -->
+  <!-- 18 · Prompt y skills -->
+  <section class="slide s-prompt" data-section="5" data-title="Prompt y skills para arrancar">
+    <p class="kicker" data-in><b>/ 05 CONSTRUIR</b><span>·</span>Tu coding agent</p>
+    <h1 data-in>Prompt y skills para arrancar</h1>
+    <div class="cols">
+      <div>
+        <p class="lbl mt" data-in>1 · Instalá las skills</p>
+        <div class="row cmds one">
+          <button class="frag cmd" data-in data-copy="npx skills add celo-org/celopedia-skills"><span class="p">$</span><code>npx skills add celo-org/celopedia-skills</code><small>Celopedia</small></button>
+          <button class="frag cmd" data-in data-copy="npx skills add https://celobuilders.xyz"><span class="p">$</span><code>npx skills add https://celobuilders.xyz</code><small>Hackathon · tag</small></button>
+        </div>
+        <p class="lbl mt" data-in>2 · Dale contexto</p>
+        <div class="row cmds one">
+          <button class="frag cmd" data-in data-copy="https://docs.ripio.com/llms.txt"><span class="p">↗</span><code>docs.ripio.com/llms.txt</code><small>Ripio · wFIAT</small></button>
+          <button class="frag cmd" data-in data-copy="https://eve.dev/llms.txt"><span class="p">↗</span><code>eve.dev/llms.txt</code><small>eve</small></button>
+        </div>
+        <ul class="frag bullets small" data-in>
+          <li><span><b>Reemplazá</b> la idea y tu tag <code>celo_…</code> antes de pegarlo</span></li>
+          <li><span><b>Verificá</b> las direcciones de los tokens: no las dejes inventar</span></li>
+        </ul>
+      </div>
+      <div class="frag card prompt-card" data-in>
+        <div class="prompt-head"><span class="lbl">3 · Pegale este prompt</span><button class="pill" id="copy-prompt">Copiar prompt</button></div>
+        <pre id="starter-prompt">Vamos a construir un agente para el hackathon Agents on Open Rails (Celo × Ripio), Track 1: Stable Agents LatAm.
+
+Idea: [describí en 2 líneas qué problema resuelve y para quién en LatAm].
+
+Reglas que no se negocian:
+- Solo Celo mainnet (chainId 42220, RPC https://forno.celo.org). Testnet solo para pruebas locales.
+- Mueve wFIAT real de Ripio (wARS, wBRL, wMXN…). Verificá las direcciones oficiales de los tokens con la skill de Celopedia y docs.ripio.com/llms.txt; no las inventes.
+- Cada transacción lleva el tag de atribución ERC-8021 [celo_XXXXXXXX] como sufijo del calldata, agregado en el cliente de la wallet (no en el contrato), con @celo/attribution-tags. Si falta, la transacción no se manda.
+- El agente registra su identidad ERC-8004 desde su propia wallet antes del 9/11.
+- El gas se paga en una stablecoin con fee abstraction de Celo.
+
+Diseño:
+- El LLM decide qué hacer; los límites (topes por pago, presupuesto diario, destinatarios permitidos) son código determinístico que el agente no puede cambiar.
+- Montos siempre en la moneda local del usuario. UX para alguien que nunca usó cripto.
+- Modo ensayo (dry-run) por defecto; pagos reales solo con una variable explícita.
+- Claves en .env, nunca en el repo.
+
+Empezá proponiendo la estructura del repo y el primer paso que mueva 1 wARS real con el tag, y escribí tests antes de tocar mainnet.</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 19 · Sedes -->
   <section class="slide s-sedes" data-section="6" data-title="Builder Sessions · sábado 17/10">
     <div class="cols">
       <div>
@@ -470,7 +515,7 @@
     <h1 class="xl" data-in>No procrastinen:<br><span>son 5 semanas</span></h1>
     <div class="steps todo" data-check="todo" data-in>
       <div class="frag step"><em>01</em><span>Registrate en Loops House</span><i class="box"></i></div>
-      <div class="frag step"><em>02</em><span>Instalá la skill del hackathon y obtené tu tag</span><i class="box"></i></div>
+      <div class="frag step"><em>02</em><span>Instalá la skill del hackathon y obtené tu tag · <code class="inline">npx skills add https://celobuilders.xyz</code></span><i class="box"></i></div>
       <div class="frag step"><em>03</em><span>Sumate al Telegram</span><i class="box"></i></div>
       <div class="frag step"><em>04</em><span>Hacé tu primera transacción real con tu tag</span><i class="box"></i></div>
     </div>
@@ -498,6 +543,6 @@
 </div>
 <script src="vendor/qrcode.js"></script>
 <script src="links.js?v=9"></script>
-<script src="deck.js?v=10"></script>
+<script src="deck.js?v=11"></script>
 </body>
 </html>
