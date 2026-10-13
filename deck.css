@@ -213,27 +213,29 @@ h1.xl { font-size: 44px; line-height: 1.1; }
 
 /* ============================================================ 02 · Quién soy */
 .s-me { --accent: var(--green); }
-.s-me .cols { grid-template-columns: 1fr 290px; gap: 44px; }
-.lede-me { font-size: 19px; line-height: 1.45; color: var(--muted); margin: 14px 0 22px; letter-spacing: -.01em; }
+.me-grid { display: grid; grid-template-columns: 172px 1fr 236px; grid-template-rows: auto auto; gap: 12px 26px; align-items: start; }
+.me-photo { grid-row: 1 / 3; width: 172px; aspect-ratio: 172 / 400; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); margin-top: 6px; }
+.me-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; display: block; }
+.me-body { grid-column: 2; }
+.me-side { grid-column: 3; grid-row: 1 / 3; }
+.lede-me { font-size: 15px; line-height: 1.45; color: var(--muted); margin: 8px 0 12px; letter-spacing: -.01em; }
 .lede-me b { color: var(--text); }
-.me-list .step { cursor: default; font-size: 13.5px; color: var(--muted); }
+.me-list .step { cursor: default; font-size: 12.5px; color: var(--muted); padding: 8px 0; grid-template-columns: 44px 1fr; line-height: 1.4; }
 .me-list .step:hover { padding-left: 0; background: none; }
-.me-list .step { grid-template-columns: 58px 1fr; }
-.step-logo { height: 26px; width: auto; max-width: 46px; object-fit: contain; justify-self: start; }
-.logos-mini { display: flex; flex-direction: column; gap: 4px; }
-.logos-mini img { height: 10px; width: auto; }
-.qr-logo { height: 26px; width: auto; margin-bottom: 12px; }
-.end-qrs .qr-logo { height: 22px; margin-bottom: 10px; }
-.corner-logo { display: block; height: 16px; width: auto; margin-bottom: 4px; }
-.socials { display: flex; gap: 22px; margin-top: 22px; }
-.social { display: flex; align-items: center; gap: 10px; }
-.social .qr { width: 64px; }
-.social .lbl { font-size: 8.5px; line-height: 1.4; text-transform: none; letter-spacing: .02em; }
 .me-list a.step { color: var(--muted); }
 .me-list a.step u { text-decoration: none; color: var(--green); margin-left: 4px; }
-.qr-corner { position: absolute; right: var(--pad); bottom: 28px; display: flex; align-items: center; gap: 10px; }
-.qr-corner .qr { width: 64px; }
-.qr-corner .lbl { font-size: 8.5px; line-height: 1.4; text-transform: none; letter-spacing: .02em; }
+.step-logo { height: 22px; width: auto; max-width: 36px; object-fit: contain; justify-self: start; display: flex; align-items: center; }
+.logos-mini { flex-direction: column; gap: 3px; }
+.logos-mini img { height: 9px; width: auto; }
+.ico-bank, .ico-ai { width: 22px; height: 22px; border-radius: 6px; border: 1px solid var(--line-2); display: grid; place-items: center; position: relative; }
+.ico-bank::before { content: ""; width: 10px; height: 8px; border-top: 2px solid var(--green); border-bottom: 2px solid var(--green); background: repeating-linear-gradient(90deg, var(--green) 0 2px, transparent 2px 4px); background-size: 10px 4px; background-position: 0 2px; background-repeat: no-repeat; }
+.ico-ai::before { content: "✦"; color: var(--green); font-size: 12px; line-height: 1; }
+.qr-logo { height: 26px; width: auto; margin-bottom: 12px; }
+.end-qrs .qr-logo { height: 22px; margin-bottom: 10px; }
+.socials { grid-column: 2 / 4; display: flex; gap: 20px; align-items: center; justify-content: space-between; margin-top: 4px; padding-right: 110px; }
+.social { display: flex; align-items: center; gap: 8px; }
+.social .qr { width: 54px; }
+.social .lbl { font-size: 8px; line-height: 1.4; text-transform: none; letter-spacing: .02em; }
 
 /* ============================================================ 02 · Web */
 .s-web, .s-tech, .s-chain, .s-concepts, .s-why, .s-now { --accent: var(--cyan); }
@@ -620,8 +622,10 @@ h1.xl { font-size: 44px; line-height: 1.1; }
   .venue { grid-template-columns: 1fr; gap: 6px; }
   .rails { display: none; }
   .end-qrs { position: static; width: auto; margin-top: 18px; }
-  .socials { flex-direction: column; gap: 12px; }
-  .qr-corner { position: static; margin-top: 14px; }
+  .me-grid { grid-template-columns: 1fr; }
+  .me-photo, .me-side, .me-body, .socials { grid-column: 1; grid-row: auto; }
+  .me-photo { width: 60%; aspect-ratio: 3 / 4; margin: 0 auto 6px; }
+  .socials { flex-wrap: wrap; gap: 12px; justify-content: flex-start; }
   .qr-mini { margin-left: 0; padding-left: 0; border: 0; width: 100%; margin-top: 12px; }
   .todo, .s-end .tail { width: auto; }
   .s-end .tail { flex-direction: column; align-items: stretch; gap: 14px; }

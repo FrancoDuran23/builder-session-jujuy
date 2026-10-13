@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23000'/><rect x='4' y='4' width='8' height='8' fill='%2335d07f'/></svg>">
 <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="deck.css?v=9">
+<link rel="stylesheet" href="deck.css?v=10">
 </head>
 <body>
 <div class="viewport" id="viewport">
@@ -52,31 +52,36 @@
 
   <!-- 02 · Quién soy -->
   <section class="slide s-me" data-section="0" data-title="Quién soy">
-    <div class="cols">
-      <div>
+    <div class="me-grid">
+      <div class="me-photo" data-in><img src="assets/franco.jpg" alt="Franco Durán"></div>
+      <div class="me-body">
         <p class="kicker" data-in><b>/ HOLA</b><span>·</span>Quién soy</p>
         <h1 data-in>Franco Durán</h1>
-        <p class="lede-me" data-in>Desarrollador jujeño. Creador de <b>Cole Juy</b> y de la comunidad <b>jujuy.dev</b>.</p>
+        <p class="lede-me" data-in>Desarrollador jujeño. Automatizo procesos con IA y construyo comunidad.</p>
         <div class="steps me-list">
-          <a class="frag step static" href="https://colejuy.vercel.app/" target="_blank" rel="noopener"><img class="step-logo" src="assets/logo-colejuy.png" alt="Cole Juy"><span><b>Cole Juy</b> · tracker de colectivos en vivo: los colectivos de San Salvador de Jujuy en el mapa, con posiciones en tiempo real. <u>colejuy.vercel.app</u></span></a>
-          <a class="frag step static" href="https://jujuy.dev.ar/" target="_blank" rel="noopener"><img class="step-logo" src="assets/mark-jujuydev.png" alt="jujuy.dev"><span><b>jujuy.dev</b> · la comunidad de devs de Jujuy: charlas, meetups y un chat para preguntar lo que sea. <u>jujuy.dev.ar</u></span></a>
-          <div class="frag step static"><span class="step-logo logos-mini"><img src="assets/logo-celo.png" alt="Celo"><img src="assets/logo-ripio.png" alt="Ripio"></span><span><b>Host de esta Builder Session</b> · la sede Jujuy del hackathon Agents on Open Rails, de Celo × Ripio.</span></div>
-        </div>
-        <div class="frag socials" data-in>
-          <a class="social" data-qr="instagram" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl">Instagram<br>@fdurandev</span></a>
-          <a class="social" data-qr="x" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl">X / Twitter<br>@fdurandev</span></a>
-          <a class="social" data-qr="github" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl">GitHub<br>FrancoDuran23</span></a>
+          <div class="frag step static"><span class="step-logo"><i class="ico-bank"></i></span><span><b>Automatización de procesos con IA</b> en bancos comerciales.</span></div>
+          <div class="frag step static"><span class="step-logo"><i class="ico-ai"></i></span><span><b>Consultor de IA</b> en varias empresas.</span></div>
+          <a class="frag step static" href="https://jujuy.dev.ar/" target="_blank" rel="noopener"><img class="step-logo" src="assets/mark-jujuydev.png" alt="jujuy.dev"><span><b>Cofundador de jujuy.dev</b>, la comunidad de devs de Jujuy. <u>jujuy.dev.ar</u></span></a>
+          <a class="frag step static" href="https://colejuy.vercel.app/" target="_blank" rel="noopener"><img class="step-logo" src="assets/logo-colejuy.png" alt="Cole Juy"><span><b>Creador de Cole Juy</b>, tracker de colectivos en vivo de San Salvador de Jujuy. <u>colejuy.vercel.app</u></span></a>
+          <div class="frag step static"><span class="step-logo logos-mini"><img src="assets/logo-celo.png" alt="Celo"><img src="assets/logo-ripio.png" alt="Ripio"></span><span><b>Host de esta Builder Session</b>, la sede Jujuy de Agents on Open Rails.</span></div>
         </div>
       </div>
-      <a class="frag card qr-big" data-qr="comunidad" target="_blank" rel="noopener" data-in>
-        <img class="qr-logo" src="assets/logo-jujuydev.png" alt="jujuy.dev">
-        <span class="qr"></span>
-        <p class="lbl">Escaneá y sumate</p>
-        <h3>Comunidad jujuy.dev</h3>
-        <p>Grupo de WhatsApp de los devs de Jujuy. Ahí seguimos después de la charla.</p>
-      </a>
+      <div class="me-side">
+        <a class="frag card qr-big" data-qr="comunidad" target="_blank" rel="noopener" data-in>
+          <img class="qr-logo" src="assets/logo-jujuydev.png" alt="jujuy.dev">
+          <span class="qr"></span>
+          <p class="lbl">Escaneá y sumate</p>
+          <h3>Comunidad jujuy.dev</h3>
+          <p>Grupo de WhatsApp de los devs de Jujuy.</p>
+        </a>
+      </div>
+      <div class="frag socials" data-in>
+        <a class="social" data-qr="instagram" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl">Instagram<br>@fdurandev</span></a>
+        <a class="social" data-qr="x" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl">X / Twitter<br>@fdurandev</span></a>
+        <a class="social" data-qr="github" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl">GitHub<br>FrancoDuran23</span></a>
+        <a class="social" data-qr="colejuy" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl">Cole Juy<br>colejuy.vercel.app</span></a>
+      </div>
     </div>
-    <a class="qr-corner" data-qr="colejuy" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl"><img src="assets/logo-colejuy.png" alt="" class="corner-logo">Cole Juy<br>colejuy.vercel.app</span></a>
   </section>
 
   <!-- 03 · La web -->
@@ -493,6 +498,6 @@
 </div>
 <script src="vendor/qrcode.js"></script>
 <script src="links.js?v=9"></script>
-<script src="deck.js?v=9"></script>
+<script src="deck.js?v=10"></script>
 </body>
 </html>
