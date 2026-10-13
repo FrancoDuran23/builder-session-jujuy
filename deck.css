@@ -202,8 +202,8 @@ h1.xl { font-size: 44px; line-height: 1.1; }
 .qr-mini { display: flex; align-items: center; gap: 10px; margin-left: 22px; padding-left: 22px; border-left: 1px solid #333; }
 .qr-mini .qr { width: 54px; }
 .qr-mini .lbl { font-size: 8px; line-height: 1.35; }
-.qr-big { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 22px 20px 20px; align-self: start; border-color: var(--green); }
-.qr-big .qr { width: 196px; margin-bottom: 16px; }
+.qr-big { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 18px 20px 16px; align-self: start; border-color: var(--green); }
+.qr-big .qr { width: 170px; margin-bottom: 12px; }
 .qr-big .lbl { color: var(--green); }
 .qr-big h3 { font-size: 20px; font-weight: 500; letter-spacing: -.02em; margin: 6px 0 6px; }
 .qr-big p:not(.lbl) { font-size: 11.5px; line-height: 1.5; color: var(--muted); }
@@ -218,11 +218,22 @@ h1.xl { font-size: 44px; line-height: 1.1; }
 .lede-me b { color: var(--text); }
 .me-list .step { cursor: default; font-size: 13.5px; color: var(--muted); }
 .me-list .step:hover { padding-left: 0; background: none; }
-.me-list .step { grid-template-columns: 44px 1fr; }
+.me-list .step { grid-template-columns: 58px 1fr; }
+.step-logo { height: 26px; width: auto; max-width: 46px; object-fit: contain; justify-self: start; }
+.logos-mini { display: flex; flex-direction: column; gap: 4px; }
+.logos-mini img { height: 10px; width: auto; }
+.qr-logo { height: 26px; width: auto; margin-bottom: 12px; }
+.end-qrs .qr-logo { height: 22px; margin-bottom: 10px; }
+.corner-logo { display: block; height: 16px; width: auto; margin-bottom: 4px; }
 .socials { display: flex; gap: 22px; margin-top: 22px; }
 .social { display: flex; align-items: center; gap: 10px; }
 .social .qr { width: 64px; }
 .social .lbl { font-size: 8.5px; line-height: 1.4; text-transform: none; letter-spacing: .02em; }
+.me-list a.step { color: var(--muted); }
+.me-list a.step u { text-decoration: none; color: var(--green); margin-left: 4px; }
+.qr-corner { position: absolute; right: var(--pad); bottom: 28px; display: flex; align-items: center; gap: 10px; }
+.qr-corner .qr { width: 64px; }
+.qr-corner .lbl { font-size: 8.5px; line-height: 1.4; text-transform: none; letter-spacing: .02em; }
 
 /* ============================================================ 02 · Web */
 .s-web, .s-tech, .s-chain, .s-concepts, .s-why, .s-now { --accent: var(--cyan); }
@@ -610,6 +621,7 @@ h1.xl { font-size: 44px; line-height: 1.1; }
   .rails { display: none; }
   .end-qrs { position: static; width: auto; margin-top: 18px; }
   .socials { flex-direction: column; gap: 12px; }
+  .qr-corner { position: static; margin-top: 14px; }
   .qr-mini { margin-left: 0; padding-left: 0; border: 0; width: 100%; margin-top: 12px; }
   .todo, .s-end .tail { width: auto; }
   .s-end .tail { flex-direction: column; align-items: stretch; gap: 14px; }

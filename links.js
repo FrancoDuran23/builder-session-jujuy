@@ -5,6 +5,6 @@ window.LINKS = {
   instagram: "https://instagram.com/fdurandev",
   x: "https://x.com/fdurandev",
   github: "https://github.com/FrancoDuran23",
-  colejuy: "https://github.com/FrancoDuran23", // ← si Cole Juy tiene link propio, ponelo acá
+  colejuy: "https://colejuy.vercel.app/",
   telegramHackathon: "https://t.me/realworldagentshackathon",
 };

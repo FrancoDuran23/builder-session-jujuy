@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23000'/><rect x='4' y='4' width='8' height='8' fill='%2335d07f'/></svg>">
 <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="deck.css?v=7">
+<link rel="stylesheet" href="deck.css?v=9">
 </head>
 <body>
 <div class="viewport" id="viewport">
@@ -58,9 +58,9 @@
         <h1 data-in>Franco Durán</h1>
         <p class="lede-me" data-in>Desarrollador jujeño. Creador de <b>Cole Juy</b> y de la comunidad <b>jujuy.dev</b>.</p>
         <div class="steps me-list">
-          <div class="frag step static"><em>01</em><span><b>Cole Juy</b> · tracker de colectivos en vivo: ves dónde viene el cole en tiempo real.</span></div>
-          <div class="frag step static"><em>02</em><span><b>jujuy.dev</b> · la comunidad de devs de Jujuy: charlas, meetups y un chat para preguntar lo que sea.</span></div>
-          <div class="frag step static"><em>03</em><span><b>Host de esta Builder Session</b> · la sede Jujuy del hackathon Agents on Open Rails, de Celo × Ripio.</span></div>
+          <a class="frag step static" href="https://colejuy.vercel.app/" target="_blank" rel="noopener"><img class="step-logo" src="assets/logo-colejuy.png" alt="Cole Juy"><span><b>Cole Juy</b> · tracker de colectivos en vivo: los colectivos de San Salvador de Jujuy en el mapa, con posiciones en tiempo real. <u>colejuy.vercel.app</u></span></a>
+          <a class="frag step static" href="https://jujuy.dev.ar/" target="_blank" rel="noopener"><img class="step-logo" src="assets/mark-jujuydev.png" alt="jujuy.dev"><span><b>jujuy.dev</b> · la comunidad de devs de Jujuy: charlas, meetups y un chat para preguntar lo que sea. <u>jujuy.dev.ar</u></span></a>
+          <div class="frag step static"><span class="step-logo logos-mini"><img src="assets/logo-celo.png" alt="Celo"><img src="assets/logo-ripio.png" alt="Ripio"></span><span><b>Host de esta Builder Session</b> · la sede Jujuy del hackathon Agents on Open Rails, de Celo × Ripio.</span></div>
         </div>
         <div class="frag socials" data-in>
           <a class="social" data-qr="instagram" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl">Instagram<br>@fdurandev</span></a>
@@ -69,12 +69,14 @@
         </div>
       </div>
       <a class="frag card qr-big" data-qr="comunidad" target="_blank" rel="noopener" data-in>
+        <img class="qr-logo" src="assets/logo-jujuydev.png" alt="jujuy.dev">
         <span class="qr"></span>
         <p class="lbl">Escaneá y sumate</p>
         <h3>Comunidad jujuy.dev</h3>
         <p>Grupo de WhatsApp de los devs de Jujuy. Ahí seguimos después de la charla.</p>
       </a>
     </div>
+    <a class="qr-corner" data-qr="colejuy" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl"><img src="assets/logo-colejuy.png" alt="" class="corner-logo">Cole Juy<br>colejuy.vercel.app</span></a>
   </section>
 
   <!-- 03 · La web -->
@@ -456,7 +458,7 @@
   <!-- 19 · Cierre -->
   <section class="slide s-end" data-section="6" data-title="No procrastinen: son 5 semanas">
     <div class="end-qrs" data-in>
-      <a class="card qr-big" data-qr="comunidad" target="_blank" rel="noopener"><span class="qr"></span><p class="lbl">Comunidad jujuy.dev</p><p>Sumate al grupo de WhatsApp</p></a>
+      <a class="card qr-big" data-qr="comunidad" target="_blank" rel="noopener"><img class="qr-logo" src="assets/logo-jujuydev.png" alt="jujuy.dev"><span class="qr"></span><p class="lbl">Comunidad jujuy.dev</p><p>Sumate al grupo de WhatsApp</p></a>
       <a class="card qr-med" data-qr="deck" target="_blank" rel="noopener"><span class="qr"></span><p class="lbl">Esta presentación</p><p>francoduran23.github.io/builder-session-jujuy</p></a>
     </div>
     <p class="kicker" data-in><b>/ 06 CIERRE</b><span>·</span>Manos a la obra</p>
@@ -490,7 +492,7 @@
 </main>
 </div>
 <script src="vendor/qrcode.js"></script>
-<script src="links.js?v=7"></script>
-<script src="deck.js?v=7"></script>
+<script src="links.js?v=9"></script>
+<script src="deck.js?v=9"></script>
 </body>
 </html>
