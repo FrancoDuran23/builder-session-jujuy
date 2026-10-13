@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23000'/><rect x='4' y='4' width='8' height='8' fill='%2335d07f'/></svg>">
 <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="deck.css?v=6">
+<link rel="stylesheet" href="deck.css?v=7">
 </head>
 <body>
 <div class="viewport" id="viewport">
@@ -18,7 +18,7 @@
   <header class="chrome">
     <div class="brand"><i></i>Agents on Open Rails · Builder Session Jujuy</div>
     <nav class="progress" id="progress" aria-label="Secciones"></nav>
-    <div class="counter" id="counter"><b>01</b> / 19</div>
+    <div class="counter" id="counter"><b>01</b> / 20</div>
   </header>
 
   <!-- 01 · Portada -->
@@ -36,6 +36,7 @@
         <img src="assets/logo-celo.png" alt="Celo" class="l-celo">
         <span class="sep"></span>
         <img src="assets/logo-ripio.png" alt="Ripio" class="l-ripio">
+        <a class="qr-mini" data-qr="deck" href="#" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl">Seguila en<br>tu celu</span></a>
       </div>
     </div>
     <div class="map cover-map" aria-hidden="true">
@@ -49,7 +50,34 @@
     </div>
   </section>
 
-  <!-- 02 · La web -->
+  <!-- 02 · Quién soy -->
+  <section class="slide s-me" data-section="0" data-title="Quién soy">
+    <div class="cols">
+      <div>
+        <p class="kicker" data-in><b>/ HOLA</b><span>·</span>Quién soy</p>
+        <h1 data-in>Franco Durán</h1>
+        <p class="lede-me" data-in>Desarrollador jujeño. Creador de <b>Cole Juy</b> y de la comunidad <b>jujuy.dev</b>.</p>
+        <div class="steps me-list">
+          <div class="frag step static"><em>01</em><span><b>Cole Juy</b> · tracker de colectivos en vivo: ves dónde viene el cole en tiempo real.</span></div>
+          <div class="frag step static"><em>02</em><span><b>jujuy.dev</b> · la comunidad de devs de Jujuy: charlas, meetups y un chat para preguntar lo que sea.</span></div>
+          <div class="frag step static"><em>03</em><span><b>Host de esta Builder Session</b> · la sede Jujuy del hackathon Agents on Open Rails, de Celo × Ripio.</span></div>
+        </div>
+        <div class="frag socials" data-in>
+          <a class="social" data-qr="instagram" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl">Instagram<br>@fdurandev</span></a>
+          <a class="social" data-qr="x" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl">X / Twitter<br>@fdurandev</span></a>
+          <a class="social" data-qr="github" target="_blank" rel="noopener"><span class="qr"></span><span class="lbl">GitHub<br>FrancoDuran23</span></a>
+        </div>
+      </div>
+      <a class="frag card qr-big" data-qr="comunidad" target="_blank" rel="noopener" data-in>
+        <span class="qr"></span>
+        <p class="lbl">Escaneá y sumate</p>
+        <h3>Comunidad jujuy.dev</h3>
+        <p>Grupo de WhatsApp de los devs de Jujuy. Ahí seguimos después de la charla.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- 03 · La web -->
   <section class="slide s-web" data-section="1" data-title="Web1, Web2, Web3 y Web4">
     <p class="kicker" data-in><b>/ 01 INTRO</b><span>·</span>La web</p>
     <h1 data-in>Web1, Web2, Web3 y Web4</h1>
@@ -427,7 +455,10 @@
 
   <!-- 19 · Cierre -->
   <section class="slide s-end" data-section="6" data-title="No procrastinen: son 5 semanas">
-    <div class="rails" aria-hidden="true"><img src="assets/rails-tall.jpg" alt=""></div>
+    <div class="end-qrs" data-in>
+      <a class="card qr-big" data-qr="comunidad" target="_blank" rel="noopener"><span class="qr"></span><p class="lbl">Comunidad jujuy.dev</p><p>Sumate al grupo de WhatsApp</p></a>
+      <a class="card qr-med" data-qr="deck" target="_blank" rel="noopener"><span class="qr"></span><p class="lbl">Esta presentación</p><p>francoduran23.github.io/builder-session-jujuy</p></a>
+    </div>
     <p class="kicker" data-in><b>/ 06 CIERRE</b><span>·</span>Manos a la obra</p>
     <h1 class="xl" data-in>No procrastinen:<br><span>son 5 semanas</span></h1>
     <div class="steps todo" data-check="todo" data-in>
@@ -458,6 +489,8 @@
   <div class="toast" id="toast"></div>
 </main>
 </div>
-<script src="deck.js?v=6"></script>
+<script src="vendor/qrcode.js"></script>
+<script src="links.js?v=7"></script>
+<script src="deck.js?v=7"></script>
 </body>
 </html>

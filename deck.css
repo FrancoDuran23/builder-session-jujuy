@@ -196,6 +196,34 @@ h1.xl { font-size: 44px; line-height: 1.1; }
 .pin.me::before, .pin.me::after, .pin.sel::before, .pin.sel::after { border-color: var(--yellow); }
 @keyframes ping { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(3.4); opacity: 0; } }
 
+/* ============================================================ QR */
+.qr { display: block; background: #fff; border-radius: 8px; padding: 6px; line-height: 0; flex: none; }
+.qr svg { display: block; width: 100%; height: auto; }
+.qr-mini { display: flex; align-items: center; gap: 10px; margin-left: 22px; padding-left: 22px; border-left: 1px solid #333; }
+.qr-mini .qr { width: 54px; }
+.qr-mini .lbl { font-size: 8px; line-height: 1.35; }
+.qr-big { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 22px 20px 20px; align-self: start; border-color: var(--green); }
+.qr-big .qr { width: 196px; margin-bottom: 16px; }
+.qr-big .lbl { color: var(--green); }
+.qr-big h3 { font-size: 20px; font-weight: 500; letter-spacing: -.02em; margin: 6px 0 6px; }
+.qr-big p:not(.lbl) { font-size: 11.5px; line-height: 1.5; color: var(--muted); }
+.qr-med { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 14px 14px 12px; }
+.qr-med .qr { width: 96px; margin-bottom: 10px; }
+.qr-med p:not(.lbl) { font-family: var(--mono); font-size: 8px; color: var(--muted); margin-top: 2px; }
+
+/* ============================================================ 02 · Quién soy */
+.s-me { --accent: var(--green); }
+.s-me .cols { grid-template-columns: 1fr 290px; gap: 44px; }
+.lede-me { font-size: 19px; line-height: 1.45; color: var(--muted); margin: 14px 0 22px; letter-spacing: -.01em; }
+.lede-me b { color: var(--text); }
+.me-list .step { cursor: default; font-size: 13.5px; color: var(--muted); }
+.me-list .step:hover { padding-left: 0; background: none; }
+.me-list .step { grid-template-columns: 44px 1fr; }
+.socials { display: flex; gap: 22px; margin-top: 22px; }
+.social { display: flex; align-items: center; gap: 10px; }
+.social .qr { width: 64px; }
+.social .lbl { font-size: 8.5px; line-height: 1.4; text-transform: none; letter-spacing: .02em; }
+
 /* ============================================================ 02 · Web */
 .s-web, .s-tech, .s-chain, .s-concepts, .s-why, .s-now { --accent: var(--cyan); }
 .webs { grid-template-columns: repeat(4, 1fr); margin-top: 44px; }
@@ -484,6 +512,9 @@ h1.xl { font-size: 44px; line-height: 1.1; }
 
 /* ============================================================ 19 · Cierre */
 .rails { position: absolute; right: 0; top: 48px; bottom: 0; width: 270px; overflow: hidden; }
+.end-qrs { position: absolute; right: var(--pad); top: 70px; width: 250px; display: grid; gap: 12px; }
+.end-qrs .qr-big .qr { width: 160px; margin-bottom: 12px; }
+.end-qrs .qr-big { padding: 18px 16px 16px; }
 .rails img { width: 100%; height: 100%; object-fit: cover; }
 .rails::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--bg), transparent 40%), linear-gradient(0deg, var(--bg), transparent 25%); z-index: 1; }
 .s-end h1 span { color: var(--yellow); }
@@ -577,6 +608,9 @@ h1.xl { font-size: 44px; line-height: 1.1; }
   .cmd code { font-size: 11px; white-space: normal; word-break: break-all; }
   .venue { grid-template-columns: 1fr; gap: 6px; }
   .rails { display: none; }
+  .end-qrs { position: static; width: auto; margin-top: 18px; }
+  .socials { flex-direction: column; gap: 12px; }
+  .qr-mini { margin-left: 0; padding-left: 0; border: 0; width: 100%; margin-top: 12px; }
   .todo, .s-end .tail { width: auto; }
   .s-end .tail { flex-direction: column; align-items: stretch; gap: 14px; }
   .s-end .dates { white-space: normal; }

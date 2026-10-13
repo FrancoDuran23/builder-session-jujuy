@@ -67,7 +67,7 @@
     });
     cur = n;
     const sec = sectionOf(n);
-    stage.dataset.cover = sec === 0;
+    stage.dataset.cover = slides[n].classList.contains("s-cover");
     stage.style.setProperty("--accent", sec === 3 ? "var(--green)" : SECTIONS[sec]?.color || "var(--green)");
     $("#counter").innerHTML = `<b>${String(n + 1).padStart(2, "0")}</b> / ${total}`;
     $$("button", progress).forEach((b, k) => { const s = k + 1; b.dataset.state = s < sec ? "done" : s === sec ? "current" : "todo"; });
@@ -163,7 +163,7 @@
     const t = document.createElement("button");
     t.className = "thumb";
     t.style.setProperty("--c", s?.color || "var(--green)");
-    t.innerHTML = `<small>${s ? s.name : "Portada"}</small><span>${sl.dataset.title}</span><b>${String(i + 1).padStart(2, "0")}</b>`;
+    t.innerHTML = `<small>${s ? s.name : "Inicio"}</small><span>${sl.dataset.title}</span><b>${String(i + 1).padStart(2, "0")}</b>`;
     t.onclick = () => { go(i); toggleOverview(false); };
     thumbs.appendChild(t);
   });
@@ -482,6 +482,19 @@
       let i = 0; tour = setInterval(() => { i++; if (i >= CITIES.length) { clearInterval(tour); select(0); return; } select(i); }, 1300);
     };
     ACTIONS["cityTour:undo"] = () => { clearInterval(tour); select(0); };
+  })();
+
+  /* ---------- QR ---------- */
+  (() => {
+    const L = window.LINKS || {};
+    $$("[data-qr]").forEach((el) => {
+      const url = L[el.dataset.qr]; if (!url || typeof qrcode !== "function") return;
+      if (el.tagName === "A") el.href = url;
+      const q = qrcode(0, "M"); q.addData(url); q.make();
+      const n = q.getModuleCount(), cells = [];
+      for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) cells.push(`M${c} ${r}h1v1h-1z`);
+      $(".qr", el).innerHTML = `<svg viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges" role="img" aria-label="QR: ${url}"><path fill="#000" d="${cells.join("")}"/></svg>`;
+    });
   })();
 
   go(fromHash(), { replace: true });
