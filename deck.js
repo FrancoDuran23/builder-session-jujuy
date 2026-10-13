@@ -46,7 +46,7 @@
     stage.style.transform = `translate(-50%, -50%) scale(${s})`;
   }
   addEventListener("resize", fit);
-  mobile.addEventListener("change", fit);
+  mobile.addEventListener("change", () => { fit(); if (mobile.matches) slides.forEach((_, i) => showAll(i)); });
   fit();
 
   slides.forEach((sl) => $$("[data-in]", sl).forEach((el, i) => el.style.setProperty("--i", i)));
@@ -56,9 +56,10 @@
   const enterHooks = {};
   const onEnter = (sel, f) => { const i = slides.findIndex((s) => s.matches(sel)); (enterHooks[i] ||= []).push(f); };
 
-  function go(n, { replace = false } = {}) {
+  function go(n, { replace = false, fromPrev = false } = {}) {
     n = Math.max(0, Math.min(total - 1, n));
     if (n === cur) return;
+    if (mobile.matches || fromPrev) showAll(n); else hideAll(n);
     slides.forEach((sl, i) => {
       sl.classList.toggle("active", i === n);
       sl.classList.toggle("past", i < n);
@@ -75,9 +76,40 @@
     if (location.hash !== hash) history[replace ? "replaceState" : "pushState"](null, "", hash);
     if (mobile.matches) scrollTo({ top: 0, behavior: "instant" });
     enterHooks[n]?.forEach((f) => f());
+    syncDots();
   }
-  const next = () => go(cur + 1);
-  const prev = () => go(cur - 1);
+  /* ---------- Pasos (fragments) ---------- */
+  const ACTIONS = {};
+  const fragsOf = (i) => $$(".frag", slides[i]);
+  const dots = document.createElement("div");
+  dots.className = "steps-dots";
+  stage.appendChild(dots);
+  function syncDots() {
+    const fr = fragsOf(cur);
+    dots.innerHTML = fr.length > 1 ? fr.map((f) => `<i class="${f.classList.contains("on") ? "on" : ""}"></i>`).join("") : "";
+  }
+  function reveal(f) {
+    f.classList.add("on");
+    const grp = f.closest("[data-pick]");
+    if (grp && f.classList.contains("tap")) $$(".tap", grp).forEach((x) => x.classList.toggle("hot", x === f));
+    if (f.dataset.action) ACTIONS[f.dataset.action]?.(f);
+  }
+  function showAll(i) { fragsOf(i).forEach((f) => { f.classList.add("on"); if (f.dataset.action) ACTIONS[f.dataset.action]?.(f, true); }); }
+  function hideAll(i) { fragsOf(i).forEach((f) => f.classList.remove("on")); }
+  const next = () => {
+    if (!mobile.matches) {
+      const f = fragsOf(cur).find((x) => !x.classList.contains("on"));
+      if (f) { reveal(f); syncDots(); return; }
+    }
+    go(cur + 1);
+  };
+  const prev = () => {
+    if (!mobile.matches) {
+      const on = fragsOf(cur).filter((x) => x.classList.contains("on"));
+      if (on.length) { const f = on.at(-1); f.classList.remove("on"); ACTIONS[f.dataset.action + ":undo"]?.(f); syncDots(); return; }
+    }
+    go(cur - 1, { fromPrev: true });
+  };
   const fromHash = () => { const m = location.hash.match(/^#\/(\d+)/); return m ? +m[1] - 1 : 0; };
   const onHash = () => { toggleOverview(false); go(fromHash(), { replace: true }); };
   addEventListener("popstate", onHash);
@@ -226,6 +258,19 @@
     }
     $("#ledger [data-reset]").onclick = () => { seal(); build(); };
     seal(); build();
+    let typing;
+    ACTIONS.chainIntro = () => { clearTimeout(typing); seal(); build(); };
+    ACTIONS.tamper = (f, instant) => {
+      const inp = $$(".block input", box)[1]; if (!inp) return;
+      const target = "Beto → Caro · 9.999.999 wARS";
+      if (instant) { inp.value = target; check(); return; }
+      clearTimeout(typing);
+      inp.value = "Beto → Caro · "; check();
+      const rest = target.slice(inp.value.length); let k = 0;
+      const type = () => { inp.value += rest[k++]; check(); if (k < rest.length) typing = setTimeout(type, 70); };
+      typing = setTimeout(type, 400);
+    };
+    ACTIONS["tamper:undo"] = () => { clearTimeout(typing); seal(); build(); };
   })();
 
   /* 05 · clave, peg, gas */
@@ -242,6 +287,13 @@
     const g = $("#gasn");
     g.oninput = () => { const usd = +g.value * 0.0005; $("#gasn-o").textContent = fmt(+g.value); $("#gasn-r").textContent = fmt(usd, usd < 0.01 ? 4 : usd < 1 ? 3 : 2); };
     g.oninput();
+    let sweep;
+    ACTIONS.gasSweep = (f, instant) => {
+      cancelAnimationFrame(sweep); if (instant) return;
+      const t0 = performance.now();
+      const run = (t) => { const p = Math.min(1, (t - t0) / 2200); g.value = Math.round(1 + 999 * (1 - Math.pow(1 - p, 3))); g.oninput(); if (p < 1) sweep = requestAnimationFrame(run); };
+      sweep = requestAnimationFrame(run);
+    };
   })();
 
   /* 06 · comparar */
@@ -249,13 +301,18 @@
     const sl = $(".s-why");
     const set = (m) => { stage.dataset.mode = m; $$("[data-vs]", sl).forEach((b) => b.classList.toggle("on", b.dataset.vs === m)); };
     $$("[data-vs]", sl).forEach((b) => (b.onclick = () => set(b.dataset.vs)));
-    onEnter(".s-why", () => set("web3"));
+    onEnter(".s-why", () => set($('.frag[data-action="web3flip"]', sl).classList.contains("on") ? "web3" : "web2"));
+    ACTIONS.web3flip = () => set("web3");
+    ACTIONS["web3flip:undo"] = () => set("web2");
   })();
 
   /* 07 · acordeón */
   (() => {
     const items = $$("#reasons .reason");
+    const only = (it) => items.forEach((x) => x.classList.toggle("open", x === it));
     items.forEach((it) => ($(".r-head", it).onclick = () => { const open = !it.classList.contains("open"); items.forEach((x) => x.classList.toggle("open", open && x === it)); }));
+    ACTIONS.openReason = (f) => only(f);
+    ACTIONS["openReason:undo"] = (f) => { const i = items.indexOf(f); only(items[i - 1]); };
   })();
 
   /* 09 · count-up + calculadora */
@@ -275,6 +332,13 @@
       $("#calc-n").textContent = fmt(n); $("#calc-r").textContent = fmt(usd, usd < 1 ? 3 : 2);
     };
     r.oninput();
+    let sw;
+    ACTIONS.calcSweep = (f, instant) => {
+      cancelAnimationFrame(sw); if (instant) { r.value = 60; r.oninput(); return; }
+      const t0 = performance.now(); r.value = 0; r.oninput();
+      const run = (t) => { const p = Math.min(1, (t - t0) / 2600); r.value = Math.round(80 * (1 - Math.pow(1 - p, 2))); r.oninput(); if (p < 1) sw = requestAnimationFrame(run); };
+      sw = requestAnimationFrame(run);
+    };
   })();
 
   /* 10 / 19 · countdown */
@@ -300,6 +364,9 @@
     const set = (m) => { $$("[data-mode]", route).forEach((b) => b.classList.toggle("on", b.dataset.mode === m)); $(".path", route).innerHTML = MODES[m].html; $(".cap", route).textContent = MODES[m].cap; };
     $$("[data-mode]", route).forEach((b) => (b.onclick = () => set(b.dataset.mode)));
     set("hoy");
+    ACTIONS.routeHoy = () => set("hoy");
+    ACTIONS.routeOnchain = () => set("onchain");
+    ACTIONS["routeOnchain:undo"] = () => set("hoy");
   })();
   $$(".fiat").forEach((f) => f.addEventListener("click", () => f.classList.toggle("hot")));
 
@@ -318,6 +385,11 @@
       focus(i);
     }));
     onEnter(".s-tracks", () => focus(null));
+    const only = (i) => { cards.forEach((c, k) => c.classList.toggle("hot", k === i)); btns.forEach((b, k) => b.classList.toggle("on", k === i)); grid.classList.toggle("dim", i != null); };
+    ACTIONS.focusTrack = (f, instant) => only(instant ? null : cards.indexOf(f));
+    ACTIONS["focusTrack:undo"] = (f) => { const i = cards.indexOf(f); only(i > 0 ? i - 1 : null); };
+    ACTIONS.focusNone = () => only(null);
+    ACTIONS["focusNone:undo"] = () => only(cards.length - 1);
   })();
 
   /* 14 · autoevaluación */
@@ -338,12 +410,22 @@
     });
     $("#score-reset").onclick = () => { vals.fill(0); render(); };
     render();
+    let demo;
+    ACTIONS.scoreDemo = (f, instant) => {
+      clearTimeout(demo); if (instant) return;
+      const target = [5, 4, 4, 3, 5]; vals.fill(0); render();
+      let i = 0, k = 0;
+      const step = () => { if (i >= 5) return; vals[i] = ++k; render(); if (k >= target[i]) { i++; k = 0; } demo = setTimeout(step, 110); };
+      demo = setTimeout(step, 500);
+    };
+    ACTIONS["scoreDemo:undo"] = () => { clearTimeout(demo); vals.fill(0); render(); };
   })();
 
   /* 16 · al azar */
   (() => {
     const ideas = $$("#ideas .idea");
     let last = -1, busy = false;
+    ACTIONS.dice = (f, instant) => { if (!instant) setTimeout(() => $("#dice").click(), 300); };
     $("#dice").onclick = () => {
       if (busy) return; busy = true;
       let n = 0; const spins = 10 + Math.floor(Math.random() * 6);
@@ -393,7 +475,15 @@
       list.appendChild(b); pills.push(b);
     });
     select(0);
+    let tour;
+    ACTIONS.city0 = () => { clearInterval(tour); select(0); };
+    ACTIONS.cityTour = (f, instant) => {
+      clearInterval(tour); if (instant) return;
+      let i = 0; tour = setInterval(() => { i++; if (i >= CITIES.length) { clearInterval(tour); select(0); return; } select(i); }, 1300);
+    };
+    ACTIONS["cityTour:undo"] = () => { clearInterval(tour); select(0); };
   })();
 
   go(fromHash(), { replace: true });
+  if (mobile.matches) slides.forEach((_, i) => showAll(i));
 })();

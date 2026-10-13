@@ -121,6 +121,16 @@ b, strong { font-weight: 600; color: var(--text); }
 .slide.active [data-in] { animation: rise .7s var(--ease) both; animation-delay: calc(100ms + var(--i, 0) * 60ms); }
 @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
+/* ---------- Pasos dentro de la slide (→ los va mostrando) ---------- */
+.slide .frag { opacity: 0; transform: translateY(10px); transition: opacity .45s var(--ease), transform .5s var(--ease), border-color .3s, box-shadow .3s, background .3s; }
+.slide.active .frag[data-in] { animation: none; }
+.slide .frag.on { opacity: 1; transform: none; }
+.slide .frag.on[data-in] { animation: none; }
+.frag[hidden] { display: none; }
+.steps-dots { position: absolute; left: var(--pad); bottom: 18px; display: flex; gap: 4px; z-index: 30; }
+.steps-dots i { width: 5px; height: 5px; border-radius: 50%; background: #35353c; transition: background .3s; }
+.steps-dots i.on { background: var(--accent); }
+
 /* ---------- Tipografía (medidas del PDF) ---------- */
 .kicker { display: flex; align-items: baseline; gap: 12px; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .kicker b { color: var(--accent); }
@@ -586,6 +596,8 @@ h1.xl { font-size: 44px; line-height: 1.1; }
   .thumbs { grid-template-columns: 1fr 1fr; }
   .toast { position: fixed; }
   .slide [data-in] { animation-delay: calc(60ms + var(--i, 0) * 30ms) !important; }
+  .slide .frag { opacity: 1; transform: none; }
+  .steps-dots { display: none; }
 }
 
 /* ============================================================ Impresión */

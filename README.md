@@ -16,6 +16,12 @@ npx serve .        # o: python3 -m http.server
 
 GitHub Pages lo sirve desde `main` / `/ (root)`; `.nojekyll` evita que Jekyll procese el sitio. La landing anterior quedó en `landing.html`.
 
+## Cómo se presenta
+
+Durante la charla alcanza con la flecha **→** (o espacio, o el clicker): cada slide va mostrando sus elementos de a uno y las demos se disparan solas en el momento justo (la cadena se falsifica y se rompe, la calculadora de gas recorre los valores, la ruta de la plata pasa de «hoy» a «con wFIAT», los tracks se resaltan uno por uno, la autoevaluación se completa, el mapa recorre las seis sedes). Cuando la slide terminó, → pasa a la siguiente. Los puntitos abajo a la izquierda muestran cuántos pasos quedan. **←** deshace el último paso.
+
+Todo sigue siendo clicable si querés intervenir a mano. En el celular en vertical no hay pasos: se ve todo junto.
+
 ## Controles
 
 | Tecla | Acción |
