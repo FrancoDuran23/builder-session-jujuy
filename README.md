@@ -49,7 +49,7 @@ En el celu: deslizar a los costados; en vertical las slides se muestran en una c
 - **15 · Evaluación** — autoevaluación de 5 criterios (20 % c/u).
 - **17 · Ideas** — “elegí una al azar”.
 - **18 · Stack** — comandos con copiar al portapapeles.
-- **19 · Prompt y skills** — comandos de skills (Celopedia y Celo Builders), contexto llms.txt y un prompt para el coding agent con botón de copiar.
+- **19 · Prompt y skills** — skills (Celopedia y la del hackathon en loops.house/agents-on-open-rails), contexto llms.txt y un prompt para el coding agent con botón de copiar.
 - **20 · Sedes** — mapa con las 6 ciudades y quién organiza cada una.
 
 ## Archivos

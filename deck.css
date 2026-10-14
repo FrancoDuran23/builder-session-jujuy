@@ -530,7 +530,7 @@ h1.xl { font-size: 44px; line-height: 1.1; }
 .prompt-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .prompt-head .lbl { color: var(--pink); }
 .prompt-card pre { flex: 1; overflow: auto; margin: 0; font-family: var(--mono); font-size: 7.9px; line-height: 1.5; color: var(--muted); white-space: pre-wrap; word-break: break-word; scrollbar-width: thin; }
-.s-prompt .bullets.small code, code.inline { font-family: var(--mono); color: var(--green); font-size: .9em; }
+.s-prompt .bullets.small code, code.inline, a.inline { font-family: var(--mono); color: var(--green); font-size: .9em; }
 
 /* ============================================================ 18 · Sedes */
 .s-sedes, .s-end { --accent: var(--yellow); }
@@ -685,3 +685,5 @@ h1.xl { font-size: 44px; line-height: 1.1; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+a.inline:hover { text-decoration: underline; }
