@@ -414,6 +414,16 @@
     .callout b { display: block; margin-bottom: 6px; font-size: 16px; }
     .callout p { margin: 0; color: var(--soft); font-size: 14.5px; line-height: 1.55; }
 
+    .ripio-qr { display: flex; align-items: center; gap: 22px; margin: 0 0 26px; padding: 18px; background: var(--panel, rgba(255,255,255,.035)); border: 1px solid var(--line); border-left: 2px solid var(--green); border-radius: 12px; color: inherit; text-decoration: none; max-width: 640px; transition: border-color .2s; }
+    .ripio-qr:hover { border-color: rgba(61,220,132,.6); }
+    .ripio-qr-tile { flex: none; width: 148px; background: #fff; border-radius: 12px; padding: 6px; line-height: 0; box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+    .ripio-qr-tile img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+    .ripio-qr-body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .ripio-qr-label { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--green); }
+    .ripio-qr-title { font-size: 20px; font-weight: 500; color: var(--text, #fff); }
+    .ripio-qr-text { color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+    .ripio-qr-link { font-family: var(--mono); font-size: 12px; color: var(--green); overflow-wrap: anywhere; }
+    @media (max-width: 640px) { .ripio-qr { flex-direction: column; align-items: flex-start; } .ripio-qr-tile { width: 180px; } }
     .stack-block { margin: 0 0 22px; }
     .stack-block h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; }
     .cmd {
@@ -778,11 +788,15 @@
           <p class="caption">Te suma a la hackathon. El tag de atribución te lo da la skill de Loops House al registrarte.</p>
         </div>
 
-        <div class="stack-block">
-          <h3>Descargá Ripio</h3>
-          <a href="https://join.ripio.com/ref/francoagustin_d_23" target="_blank" rel="noopener"><img src="assets/qr-ripio.png" alt="QR para descargar Ripio" width="160" height="160" style="background:#fff;padding:6px;image-rendering:pixelated"></a>
-          <p class="caption">Escaneá el QR para bajar la app y registrarte: <a href="https://join.ripio.com/ref/francoagustin_d_23" target="_blank" rel="noopener">join.ripio.com/ref/francoagustin_d_23</a></p>
-        </div>
+        <a class="ripio-qr" href="https://join.ripio.com/ref/francoagustin_d_23" target="_blank" rel="noopener">
+          <span class="ripio-qr-tile"><img src="assets/qr-ripio.svg" alt="QR para descargar Ripio" width="200" height="200"></span>
+          <span class="ripio-qr-body">
+            <span class="ripio-qr-label">/ Ripio · app</span>
+            <span class="ripio-qr-title">Descargá Ripio</span>
+            <span class="ripio-qr-text">Escaneá el QR con la cámara del celu para bajar la app y registrarte.</span>
+            <span class="ripio-qr-link">join.ripio.com/ref/francoagustin_d_23 ↗</span>
+          </span>
+        </a>
 
         <div class="stack-block">
           <h3>Ripio Ramp · ejemplo</h3>
